@@ -40,12 +40,18 @@ class PerawatController extends Controller
        $this->validate($request , [
         'nama'=>'required',
         'jenis_kelamin'=>'required',
-        'tgl_lahir'=>'required',
+        'tgl_lahir'=>'required|date_format:Y-m-d',
+       ],[
+        'nama.required'=>'Nama harus di isi',
+        'jenis_kelamin.required'=>'jenis kelamin harus di isi',
+        'tgl_lahir.date_format'=>'tanggal lahir harus di isi',
+
        ]);
+       $tgl_lahir_formatted = date('d-m-Y', strtotime($request->tgl_lahir));
        Perawat::create([
         'nama'=>$request->nama,
         'jenis_kelamin'=>$request->jenis_kelamin,
-        'tgl_lahir'=>$request->tgl_lahir,
+        'tgl_lahir'=>$tgl_lahir_formatted,
 
        ]);
        return redirect()->route('perawat.index');
@@ -68,9 +74,9 @@ class PerawatController extends Controller
      * @param  \App\Models\Perawat  $perawat
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit(Perawat $perawat)
     {
-        return view('perawat.edit');
+        return view('perawat.edit', compact('perawat'));
     }
 
     /**
@@ -80,9 +86,20 @@ class PerawatController extends Controller
      * @param  \App\Models\Perawat  $perawat
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePerawatRequest $request, Perawat $perawat)
+    public function update(Request $request, Perawat $perawat)
     {
-        //
+        $this->validate($request,[
+            'nama'=>'required',
+            'jenis_kelamin'=>'required',
+            'tgl_lahir'=>'required|date_format:Y-m-d',
+        ]);
+        $tgl_lahir_formatted = date('d-m-Y', strtotime($request->tgl_lahir));
+            $perawat->update([
+                'nama'=>$request->nama,
+                'jenis_kelamin'=>$request->jenis_kelamin,
+                'tgl_lahir'=>$tgl_lahir_formatted,
+            ]);
+        return redirect()->route('perawat.index')->with(['success' =>'Data berhasil Di ubah!']);
     }
 
     /**

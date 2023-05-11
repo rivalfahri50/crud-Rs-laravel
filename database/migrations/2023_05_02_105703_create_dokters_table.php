@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('dokters', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('image');
+            $table->string('image')->nulllable;
             $table->string('jenis_kelamin');
             $table->string('tgl_lahir');
             $table->timestamps();

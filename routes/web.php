@@ -1,6 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\UserController;
+
+
+
+
+// //Route::get('/', function () {
+//    return view('welcome');
+//});
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +28,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/nyoba', function () {
-    return view('index');
+Route::get('/dashboard', function () {
+    return view('index')->middleware('hakAkses');
+
 });
+
 
 Route::resource('/perawat', App\Http\Controllers\PerawatController::class);
 Route::resource('/dokter', App\Http\Controllers\DokterController::class);
 Route::resource('/no_antrian', App\Http\Controllers\NoAntrianController::class);
 Route::resource('/pasien', App\Http\Controllers\PasienController::class);
 Route::resource('/obat', App\Http\Controllers\ObatController::class);
+
+
+
+Route::get('/', [CustomAuthController::class, 'home']);
+Route::get('dashboard', [CustomAuthController::class, 'dashboard'])->middleware('hakAkses');
+Route::get('login', [CustomAuthController::class, 'index'])->name('login');
+Route::post('postlogin', [CustomAuthController::class, 'login'])->name('postlogin');
+Route::get('signup', [CustomAuthController::class, 'signup'])->name('register-user');
+Route::post('postsignup', [CustomAuthController::class, 'signupsave'])->name('postsignup');
+Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout');

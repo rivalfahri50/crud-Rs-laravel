@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\pasien;
+use App\Models\no_antrian;
 use App\Http\Requests\StorepasienRequest;
 use App\Http\Requests\UpdatepasienRequest;
 use Illuminate\Http\Request;
@@ -26,7 +27,8 @@ class PasienController extends Controller
      */
     public function create()
     {
-        return view ('pasien.create');
+        $no_antrians=no_antrian::all();
+        return view ('pasien.create', compact('no_antrians'));
     }
 
     /**
@@ -39,13 +41,17 @@ class PasienController extends Controller
     {
         $this->validate($request , [
             'nama'=>'required',
-            'no_antrian'=>'required',
-            'keluhann'=>'required',
+            'no_antrian'=>'required|unique:pasiens',
+            'keluhan'=>'required',
+           ],[
+            'nama.required'=>'Nama harus di isi',
+            'no_antrian.unique'=>'Kode telah terdaftar',
+            'keluhan.required'=>'Keluhan harus di isi',
            ]);
            pasien::create([
             'nama'=>$request->nama,
             'no_antrian'=>$request->no_antrian,
-            'keluhann'=>$request->keluhann,
+            'keluhan'=>$request->keluhan,
 
            ]);
            return redirect()->route('pasien.index');
@@ -80,13 +86,14 @@ class PasienController extends Controller
      * @param  \App\Models\pasien  $pasien
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatepasienRequest $request, pasien $pasien)
+    public function update(Request $request, pasien $pasien)
     {
         $this->validate($request,[
             'nama'=>'required',
             'no_antrian'=>'required',
             'keluhan'=>'required',
         ]);
+
             $pasien->update([
                 'nama'=>$request->nama,
                 'no_antrian'=>$request->no_antrian,
@@ -103,7 +110,7 @@ class PasienController extends Controller
      */
     public function destroy(pasien $pasien)
     {
-        $perawat->delete();
+        $pasien->delete();
         return  redirect()->route('pasien.index');
     }
 }

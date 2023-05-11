@@ -39,14 +39,18 @@ class ObatController extends Controller
     {
         $this->validate($request , [
             'keluhan'=>'required',
-            'tgl_berobat'=>'required',
+            'tgl_berobat'=>'required|date_format:Y-m-d',
             'biaya'=>'required',
            ]);
+           $tgl_berobat_formatted = date('d-m-Y', strtotime($request->tgl_berobat));
            obat::create([
             'keluhan'=>$request->keluhan,
-            'tgl_berobat'=>$request->tgl_berobat,
+            'tgl_berobat'=>$tgl_berobat_formatted,
             'biaya'=>$request->biaya,
 
+           ],[
+            'keluhan.required'=>'keluhan harus di isi',
+            'biaya.required'=>'biaya harus di isi',
            ]);
            return redirect()->route('obat.index');
     }
@@ -80,16 +84,21 @@ class ObatController extends Controller
      * @param  \App\Models\obat  $obat
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateobatRequest $request, obat $obat)
+    public function update(Request $request, obat $obat)
     {
         $this->validate($request,[
             'keluhan'=>'required',
-            'tgl_berobat'=>'required',
+            'tgl_berobat'=>'required|date_format:Y-m-d',
             'biaya'=>'required',
+        ],[
+            'keluhan.required'=>'keluhan harus diisi',
+            'tgl_berobat.date_format'=>'tanggal berobat harus diisi',
+            'biaya.required'=>'biaya harus diisi',
         ]);
+        $tgl_berobat_formatted = date('d-m-Y', strtotime($request->tgl_berobat));
             $obat->update([
                 'keluhan'=>$request->keluhan,
-                'tgl_berobat'=>$request->tgl_berobat,
+                'tgl_berobat'=>$tgl_berobat_formatted,
                 'biaya'=>$request->biaya,
             ]);
         return redirect()->route('obat.index')->with(['success' =>'Data berhasil Di ubah!']);

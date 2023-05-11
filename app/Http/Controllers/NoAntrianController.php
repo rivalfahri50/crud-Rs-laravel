@@ -38,14 +38,19 @@ class NoAntrianController extends Controller
     public function store(Request $request)
     {
         $this->validate($request , [
-            'no_antrian'=>'required',
+            'no_antrian'=>'required|unique:no_antrians',
             'nama'=>'required',
-            'tgl_berobat'=>'required',
+            'tgl_berobat'=>'required|date_format:Y-m-d',
+           ],[
+            'no_antrian.unique'=>'Kode telah terdaftar',    
+            'nama.required'=>'Nama harus di isi',
+            'tgl_berobat.date_format'=>'tanggal berobat harus di isi',
            ]);
+           $tgl_berobat_formatted = date('d-m-Y', strtotime($request->tgl_berobat));
            no_antrian::create([
             'no_antrian'=>$request->no_antrian,
             'nama'=>$request->nama,
-            'tgl_berobat'=>$request->tgl_berobat,
+            'tgl_berobat'=>$tgl_berobat_formatted,
 
            ]);
            return redirect()->route('no_antrian.index');
@@ -80,17 +85,18 @@ class NoAntrianController extends Controller
      * @param  \App\Models\no_antrian  $no_antrian
      * @return \Illuminate\Http\Response
      */
-    public function update(Updateno_antrianRequest $request, no_antrian $no_antrian)
+    public function update(Request $request, no_antrian $no_antrian)
     {
         $this->validate($request,[
             'no_antrian'=>'required',
             'nama'=>'required',
-            'tgl_berobat'=>'required',
-        ]);
+            'tgl_berobat'=>'required|date_format:Y-m-d',
+        ]   );
+        $tgl_berobat_formatted = date('d-m-Y', strtotime($request->tgl_berobat));
             $no_antrian->update([
                 'no_antrian'=>$request->no_antrian,
                 'nama'=>$request->nama,
-                'tgl_berobat'=>$request->tgl_berobat,
+                'tgl_berobat'=>$tgl_berobat_formatted,
             ]);
         return redirect()->route('no_antrian.index')->with(['success' =>'Data berhasil Di ubah!']);
     }

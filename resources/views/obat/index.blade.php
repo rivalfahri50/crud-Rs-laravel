@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -15,6 +16,7 @@
     <br>
     <center><h2>Obat</h2></center>
     <br>
+    <a href="{{ url('dashboard') }}" class="btn btn-md btn-warning">KEMBALI</a>
     &nbsp; &nbsp;<a href="{{ route('obat.create') }}" class="btn btn-primary">Add Data</a>
     <hr>
 <table class="table table-striped">
@@ -47,14 +49,35 @@
             <form id="delete-form-{{ $obat->id }}" action="{{route('obat.destroy', $obat->id) }}" method="POST">
               @csrf
               @method('DELETE')
-              <button type="submit" class="btn btn-primary">Edit</button>
-            <button type="submit" class="btn btn-danger">Hapus</button>
-          </form>
-          </td>
-    </tr>
-    @empty
+              <a href="{{ route('obat.edit',$obat->id) }}" class="btn btn-primary">Edit</a>
+              <button type="submit" class="btn btn-danger" onclick="showAlert(event, {{ $obat->id }})">Delete</button>
+            </form>
+        </center>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            function showAlert(event, id) {
+                event.preventDefault(); // menghentikan proses submit form
 
-    @endforelse
-</table>
-</body>
-</html>
+                swal({
+                    title: "Apakah anda yakin?",
+                    text: "Data obat akan dihapus secara permanen!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        document.getElementById("delete-form-"+id).submit(); // submit form jika user mengklik tombol "Ya"
+                    } else {
+                        swal("Data obat tidak dihapus.");
+                    }
+                });
+            }
+        </script>
+                        </td>
+                    </tr>
+                @empty
+                @endforelse
+           </table>
+        </body>
+        </html>

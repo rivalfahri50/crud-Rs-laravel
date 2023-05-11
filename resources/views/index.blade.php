@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>RSUD MALANG</title>
+        <title>RS</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="{{ asset ('assets/favicon.ico')}}" />
         <!-- Font Awesome icons (free version)-->
@@ -15,24 +15,26 @@
         <link href="{{ asset ('https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic')}}" rel="stylesheet" type="text/css"/>
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{{ asset ('css/styles.css')}}" rel="stylesheet" />
+        <link rel="stylesheet" href="{{  asset ('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="')}} crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body id="page-top">
         <!-- Navigation-->
                             <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
                                 <div class="container">
-                                    <a class="navbar-brand" href="#page-top">Selama datang</a>
+                                    <a class="navbar-brand" href="#page-top">Selamat datang</a>
                                     <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                                         Menu
                                         <i class="fas fa-bars"></i>
                                     </button>
                                     <div class="collapse navbar-collapse" id="navbarResponsive">
                                         <ul class="navbar-nav ms-auto">
-                                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{ route('dokter.index') }}">Dokter</a></li>
+                                            <li class="nav-item mx-0 mx-lg-1 "><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{ route('dokter.index') }}">Dokter</a></li>
                                             <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{ route('perawat.index') }}">Perawat</a></li>
                                             <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{ route('pasien.index') }}">Pasien</a></li>
                                             <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{ route('no_antrian.index') }}">NoAntrian</a></li>
                                             <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{ route('obat.index') }}">Obat</a></li>
-                                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="">Kembali</a></li>
+                                            <li class="nav-item mx-0 mx-lg-1"><a href="{{ route('signout') }}" class="nav-link py-3 px-0 px-lg-3 rounded">Logout</a></li>
+
                                         </ul>
                                     </div>
                                 </div>

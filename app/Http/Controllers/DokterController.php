@@ -6,6 +6,7 @@ use App\Models\dokter;
 use App\Http\Requests\StoredokterRequest;
 use App\Http\Requests\UpdatedokterRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 class DokterController extends Controller
 {
     /**
@@ -41,18 +42,23 @@ class DokterController extends Controller
             'nama'=>'required',
             'image'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'jenis_kelamin'=>'required',
-            'tgl_lahir'=>'required',
+            'tgl_lahir'=>'required|date_format:Y-m-d',
+           ],[
+            'image.required|image'=>'foto harus di pilih',
+            'jenis_kelamin.required'=>'jenis kelamin harus di pilih',
+            'tgl_lahir.date_format'=>'tanggal lahir harus di isi',
            ]);
+           $tgl_lahir_formatted = date('d-m-Y', strtotime($request->tgl_lahir));
            $image = $request->file('image');
            $image->storeAs('public/dkt', $image->hashName());
            dokter::create([
             'nama'=>$request->nama,
             'image'=>$image->hashName(),
             'jenis_kelamin'=>$request->jenis_kelamin,
-            'tgl_lahir'=>$request->tgl_lahir,
+            'tgl_lahir'=>$tgl_lahir_formatted,
 
            ]);
-           return redirect()->route('dokter.index');
+           return redirect()->route('dokter.index')->with('success','Data Berhasil Terkirim');
     }
 
     /**
@@ -83,37 +89,40 @@ class DokterController extends Controller
      * @param  \App\Http\Requests\UpdatedokterRequest  $request
      * @param  \App\Models\dokter  $dokter
      * @return \Illuminate\Http\Response
-     */
-    public function update(UpdatedokterRequest $request, dokter $dokter)
-    {
-        $this->validate($request,[
-            'nama'=>'required',
-            'image'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'jenis_kelamin'=>'required',
-            'tgl_lahir'=>'required',
-        ]);
-        if($request->hashFile('name')){
-            $image = $request->fil('image');
-            $image->storeAs('storage/dkt', $image->hashName());
+     */public function update(Request $request, dokter $dokter)
+{
+    $this->validate($request,[
+        'nama'=>'required',
+        'image'=>'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'jenis_kelamin'=>'required',
+        'tgl_lahir'=>'required|date_format:Y-m-d',
+    ]);
+    $tgl_lahir_formatted = date('d-m-Y', strtotime($request->tgl_lahir));
+    if($request->hasFile('image')){
+        $image = $request->file('image');
+        $image->storeAs('public/dkt', $image->hashName());
 
-            Storage::delete('storage/dkt'.$dokter->image);
-            $dokter->update([
-                'nama'=>$request->nama,
-                'image'=>$image->hashName(),
-                'jenis_kelamin'=>$request->jenis_kelamin,
-                'tgl_lahir'=>$request->tgl_lahir,
-            ]);
-        } else {
-            //update post without image
-            $dokter->update([
-                'nama'=>$request->nama,
-                'image'=>$image->hashName(),
-                'jenis_kelamin'=>$request->jenis_kelamin,
-                'tgl_lahir'=>$request->tgl_lahir,
-            ]);
-            }
-        return redirect()->route('dokter.index')->with(['success' =>'Data berhasil Di ubah!']);
+        Storage::delete('public/dkt/'.$dokter->image);
+        $dokter->update([
+            'nama'=>$request->nama,
+            'image'=>$image->hashName(),
+            'jenis_kelamin'=>$request->jenis_kelamin,
+            'tgl_lahir'=>$tgl_lahir_formatted,
+        ]);
+    } else {
+        $tgl_lahir_formatted = date('d-m-Y', strtotime($request->tgl_lahir));
+        $image = $dokter->image;
+
+        $dokter->update([
+            'nama'=>$request->nama,
+            'image'=>$image,
+            'jenis_kelamin'=>$request->jenis_kelamin,
+            'tgl_lahir'=>$tgl_lahir_formatted,
+        ]);
     }
+    return redirect()->route('dokter.index')->with(['success' =>'Data berhasil Di ubah!']);
+}
+
 
     /**
      * Remove the specified resource from storage.
@@ -123,7 +132,7 @@ class DokterController extends Controller
      */
     public function destroy(dokter $dokter)
     {
-      
+
 
       $dokter->delete();
 
