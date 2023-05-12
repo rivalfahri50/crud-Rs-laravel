@@ -45,6 +45,7 @@ class PasienController extends Controller
             'keluhan'=>'required',
            ],[
             'nama.required'=>'Nama harus di isi',
+            'no_antrian.required'=>'no harus diisi',
             'no_antrian.unique'=>'Kode telah terdaftar',
             'keluhan.required'=>'Keluhan harus di isi',
            ]);
@@ -54,7 +55,7 @@ class PasienController extends Controller
             'keluhan'=>$request->keluhan,
 
            ]);
-           return redirect()->route('pasien.index');
+           return redirect()->route('pasien.index')->with('success','Data Berhasil Terkirim');
     }
 
     /**
@@ -99,7 +100,7 @@ class PasienController extends Controller
                 'no_antrian'=>$request->no_antrian,
                 'keluhan'=>$request->keluhan,
             ]);
-        return redirect()->route('pasien.index')->with(['success' =>'Data berhasil Di ubah!']);
+        return redirect()->route('pasien.index')->with('update','Data berhasil Di ubah!');
     }
 
     /**

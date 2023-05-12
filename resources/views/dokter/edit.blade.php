@@ -19,22 +19,18 @@
     @method('PUT')
 
 
-    <div class="mb-3">
-        <label class="form-label fw-bold">Nama Dokter</label>
         <div class="mb-3">
-            <select name="nama" class="form-select form-control">
-                <option value="Drs ASWAN" {{ old('Drs ASWAN', $dokter->nama) == 'Drs ASWAN' ? 'selected' : '' }}>Drs ASWAN</option>
-                <option value="Drs Suninik Sayuti" {{ old('Drs Suninik Sayuti', $dokter->nama) == 'Drs Suninik Sayuti' ? 'selected' : '' }}>Drs Suninik Sayuti</option>
-                <option value="Drs Fauzi hadan" {{ old('Drs Fauzi hadan', $dokter->nama) == 'Drs Fauzi hadan' ? 'selected' : '' }}>Drs Fauzi hadan</option>
-                <option value="Drs Kader Nurgomedov" {{ old('Drs Kader Nurgomedov', $dokter->nama) == 'Drs Kader Nurgomedov' ? 'selected' : '' }}>Drs Kader Nurgomedov</option>
-                <option value="Drs Reno Gundala" {{ old('Drs Reno Gundala', $dokter->nama) == 'Drs Reno Gundala' ? 'selected' : '' }}>Drs Reno Gundala</option>
-            </select>
-            <!-- error message untuk satuan -->
+            <label class="form-label fw-bold">Nama Dokter</label>
+            <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama', $dokter->nama) }}"
+            placeholder="Masukkan nama">
+            <!-- error message untuk title -->
             @error('nama')
-            <div class="alert alert-danger mt-2">{{ $message }}</div>
+            <div class="alert alert-danger mt-2">
+                {{ $message }}
+            </div>
             @enderror
-        </div>
-    </div>
+            </div>
+
 
     <div class="mb-3">
         <label class="form-label fw-bold">Foto</label>
@@ -60,7 +56,7 @@
 
             @error('jenis_kelamin')
             <div class="alert alert-danger mt-2">
-                Jenis kelamin harus di pilih</div>
+                {{ $message }}</div>
             @enderror
         </div>
     </div>
@@ -71,12 +67,11 @@
             value="{{ date('Y-m-d', strtotime($dokter->tgl_lahir)) }}">
         @error('tgl_lahir')
             <div class="alert alert-danger mt-2">
-                Tanggal harus di isi
+                {{ $message }}
             </div>
         @enderror
     </div>
     <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
-    <button type="reset" class="btn btn-md btn-danger">RESET</button>
     <a href="{{ route('dokter.index') }}" class="btn btn-md btn-warning">KEMBALI</a>
     </form>
     </div>

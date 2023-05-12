@@ -25,7 +25,7 @@
         <!-- error message untuk title -->
         @error('nama')
         <div class="alert alert-danger mt-2">
-        Nama wajib di isi
+            {{ $message }}
         </div>
         @enderror
         </div>
@@ -38,7 +38,7 @@
     <!-- error message untuk title -->
     @error('no_antrian')
     <div class="alert alert-danger mt-2">
-    No Harus di isi
+        {{ $message }}
     </div>
     @enderror
     </div>
@@ -52,7 +52,7 @@
         <!-- error message untuk title -->
         @error('keluhan')
         <div class="alert alert-danger mt-2">
-        Apa Keluhan Anda
+            {{ $message }}
         </div>
         @enderror
         </div>
@@ -61,8 +61,7 @@
 
 
     <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
-    <button type="reset" class="btn btn-md btn-danger">RESET</button>
-    <a href="{{ route('no_antrian.index') }}" class="btn btn-md btn-warning">KEMBALI</a>
+    <a href="{{ route('pasien.index') }}" class="btn btn-md btn-warning">KEMBALI</a>
     </form>
     </div>
     </div>

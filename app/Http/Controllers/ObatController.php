@@ -50,9 +50,10 @@ class ObatController extends Controller
 
            ],[
             'keluhan.required'=>'keluhan harus di isi',
+            'tg_beroba.required'=>'Tanggall harus di isi',
             'biaya.required'=>'biaya harus di isi',
            ]);
-           return redirect()->route('obat.index');
+           return redirect()->route('obat.index')->with('success','Data Berhasil Terkirim');
     }
 
     /**
@@ -101,7 +102,7 @@ class ObatController extends Controller
                 'tgl_berobat'=>$tgl_berobat_formatted,
                 'biaya'=>$request->biaya,
             ]);
-        return redirect()->route('obat.index')->with(['success' =>'Data berhasil Di ubah!']);
+        return redirect()->route('obat.index')->with('update', 'Data berhasil Di ubah!');
     }
 
     /**

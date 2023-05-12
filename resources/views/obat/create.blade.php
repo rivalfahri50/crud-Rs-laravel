@@ -29,7 +29,7 @@
         <!-- error message untuk title -->
         @error('keluhan')
             <div class="alert alert-danger mt-2">
-                Apa Keluhan Anda
+                {{ $message }}
             </div>
         @enderror
     </div>
@@ -40,7 +40,7 @@
         <!-- error message untuk title -->
         @error('tgl_berobat')
             <div class="alert alert-danger mt-2">
-                Tanggal Harus Di isi
+                {{ $message }}
             </div>
         @enderror
     </div>
@@ -51,7 +51,7 @@
         <!-- error message untuk title -->
         @error('biaya')
             <div class="alert alert-danger mt-2">
-                Biaya Harus Di isi
+                {{ $message }}
             </div>
         @enderror
     </div>
@@ -60,7 +60,6 @@
 
 
     <button type="submit" class="btn btn-md btn-primary">TAMBAH</button>
-    <button type="reset" class="btn btn-md btn-warning">RESET</button>
     <a class="btn btn-md btn-danger"href="{{ route('obat.index') }}">KEMBALI</a>
 
 </form>

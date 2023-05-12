@@ -19,13 +19,7 @@
                             @csrf
                             <div class="form-group">
                                 <div>Dokter</div>
-                                <select class ="form-control" name="nama" id="nama">
-                                    <option value="Drs ASWAN">Drs ASWAN</option>
-                                    <option value="Drs Suninik Sayuti">Drs Suninik Sayuti</option>
-                                    <option value="Drs Fauzi hadan">Drs Fauzi hadan</option>
-                                    <option value="Drs Kader Nurgomedov">Drs Kader Nurgomedov</option>
-                                    <option value="Drs Reno Gundala">Drs Reno Gundala</option>
-                                </select>
+                              <input type="text" name="nama" class="form-control">
                                 <!-- error message untuk title -->
                                 @error('nama')
                                     <div class="alert alert-danger mt-2">
@@ -41,7 +35,7 @@
                                 <!-- error message untuk title -->
                                 @error('image')
                                     <div class="alert alert-danger mt-2">
-                                        pilih foto
+                                        {{ $message }}
                                     </div>
                                 @enderror
                             </div>
@@ -65,13 +59,12 @@
                             <!-- error message untuk title -->
                             @error('tgl_lahir')
                                 <div class="alert alert-danger mt-2">
-                                    Tanggal Lahir harus di isi
+                                    {{ $message }}
                                 </div>
                             @enderror
                         </div>
                         <div>
                             <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
-                            <button type="reset" class="btn btn-md btn-warning">RESET</button>
                             <a class="btn btn-md btn-danger"href="{{ route('dokter.index') }}">KEMBALI</a>
                         </div>
                         </form>

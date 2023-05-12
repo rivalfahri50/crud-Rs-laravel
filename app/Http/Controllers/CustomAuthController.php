@@ -26,15 +26,18 @@ class CustomAuthController extends Controller
         $request->validate([
             'email' => 'required',
             'password' => 'required',
+        ],[
+            'email.required'=>'email harus di isi',
+            'password.required'=>'password harus di isi',
         ]);
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             return redirect()->intended('dashboard')
-                        ->with('message', 'Signed in!');
+                        ->with('successlgn', 'Signed in!');
         }
 
-        return redirect('/login')->with('message', 'email atau password salah');
+        return redirect('/login')->with('message', 'email / password Salah!!!')->withInput();
     }
 
     public function signup()
@@ -48,15 +51,20 @@ class CustomAuthController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required',
-            "password_confirmation" => "same:password",
+            "password_confirmation" => "required|same:password",
         ],[
-            'password_confirmation.same'=>'Pasword tidak sama',
+            'name.required'=>'nama harus di isi',
+            'email.required'=>'email harus di isi',
+            'email.unique'=>'email sudah terdaftar',
+            'password.required'=>'password harus di isi',
+            'password_confirmation.same'=>'Password tidak sama',
+            'password_confirmation.required'=>'Password konfirmasi harus di isi',
         ]);
 
         $data = $request->all();
         $check = $this->create($data);
 
-        return redirect("login");
+        return redirect("login")->with('success', 'berhasil registrasi');
         }
     public function create(array $data)
     {
@@ -79,7 +87,7 @@ class CustomAuthController extends Controller
         Session::flush();
         Auth::logout();
 
-        return redirect('/login');
+        return redirect('/login')->with('logout','Anda telah logout');
     }
 
 }

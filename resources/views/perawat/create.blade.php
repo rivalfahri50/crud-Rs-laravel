@@ -29,19 +29,19 @@
         <!-- error message untuk title -->
         @error('nama')
             <div class="alert alert-danger mt-2">
-                Wajib isi nama
+                {{ $message }}
             </div>
         @enderror
     </div>
     <div class="form-group">
-        <label class="font-weight-bold">Jenis Kelamin</label>
-        <input type="radio"  @error('jenis_kelamin') is-invalid @enderror" name="jenis_kelamin"  value="Laki laki">laki laki
-        <input type="radio"  @error('jenis_kelamin') is-invalid @enderror" name="jenis_kelamin"  value="perempuan">perempuan
+        <label class="font-weight-bold">Jenis Kelamin</label><br>
+        <input type="radio"  @error('jenis_kelamin') is-invalid @enderror name="jenis_kelamin"  value="Laki laki">laki laki
+        <input type="radio"  @error('jenis_kelamin') is-invalid @enderror name="jenis_kelamin"  value="perempuan">perempuan
 
         <!-- error message untuk title -->
         @error('jenis_kelamin')
             <div class="alert alert-danger mt-2">
-                Pilih jenis kelamin
+                {{ $message }}
             </div>
         @enderror
     </div>
@@ -52,7 +52,7 @@
         <!-- error message untuk title -->
         @error('tgl_lahir')
             <div class="alert alert-danger mt-2">
-                Wajib isi Tanggal
+                {{ $message }}
             </div>
         @enderror
     </div>
@@ -61,7 +61,6 @@
 
 
     <button type="submit" class="btn btn-md btn-primary">TAMBAH</button>
-    <button type="reset" class="btn btn-md btn-warning">RESET</button>
     <a class="btn btn-md btn-danger"href="{{ route('perawat.index') }}">KEMBALI</a>
 
 </form>

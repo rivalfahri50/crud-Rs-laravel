@@ -44,9 +44,10 @@ class DokterController extends Controller
             'jenis_kelamin'=>'required',
             'tgl_lahir'=>'required|date_format:Y-m-d',
            ],[
-            'image.required|image'=>'foto harus di pilih',
-            'jenis_kelamin.required'=>'jenis kelamin harus di pilih',
-            'tgl_lahir.date_format'=>'tanggal lahir harus di isi',
+            'nama.required'=>'nama wajib diisi',
+            'image.required'=>'foto harus di pilih',
+            'jenis_kelamin.required'=>'jenis kelamin harus dipilih',
+            'tgl_lahir.required'=>'tanggal lahir harus di isi',
            ]);
            $tgl_lahir_formatted = date('d-m-Y', strtotime($request->tgl_lahir));
            $image = $request->file('image');
@@ -120,7 +121,7 @@ class DokterController extends Controller
             'tgl_lahir'=>$tgl_lahir_formatted,
         ]);
     }
-    return redirect()->route('dokter.index')->with(['success' =>'Data berhasil Di ubah!']);
+    return redirect()->route('dokter.index')->with('update','Data berhasil Di ubah!');
 }
 
 
@@ -133,9 +134,9 @@ class DokterController extends Controller
     public function destroy(dokter $dokter)
     {
 
-
+        unlink(public_path('storage/dkt/'.$dokter->image));
       $dokter->delete();
 
-      return redirect()->route('dokter.index')->with(['success'=>'Data Berhasil Dihapus!']);
+      return redirect()->route('dokter.index');
     }
 }

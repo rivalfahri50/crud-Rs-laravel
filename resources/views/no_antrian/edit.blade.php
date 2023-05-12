@@ -26,7 +26,7 @@
     <!-- error message untuk title -->
     @error('no_antrian')
     <div class="alert alert-danger mt-2">
-    No Harus di isi
+        {{ $message }}
     </div>
     @enderror
     </div>
@@ -36,9 +36,9 @@
         <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama', $no_antrian->nama) }}"
         placeholder="Masukkan nomer">
         <!-- error message untuk title -->
-        @error('no_antrian')
+        @error('nama')
         <div class="alert alert-danger mt-2">
-        Nama harus di isi
+            {{ $message }}
         </div>
         @enderror
         </div>
@@ -49,7 +49,7 @@
                 value="{{ date('Y-m-d', strtotime($no_antrian->tgl_berobat)) }}">
             @error('tgl_berobat')
                 <div class="alert alert-danger mt-2">
-                    Tanggal wajib di isi
+                    {{ $message }}
                 </div>
             @enderror
         </div>
@@ -57,7 +57,6 @@
 
 
     <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
-    <button type="reset" class="btn btn-md btn-danger">RESET</button>
     <a href="{{ route('no_antrian.index') }}" class="btn btn-md btn-warning">KEMBALI</a>
     </form>
     </div>

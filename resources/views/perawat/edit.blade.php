@@ -25,7 +25,7 @@
         <!-- error message untuk title -->
         @error('nama')
         <div class="alert alert-danger mt-2">
-        Nama wajib di isi
+            {{ $message }}
         </div>
         @enderror
         </div>
@@ -49,13 +49,12 @@
                     value="{{ date('Y-m-d', strtotime($perawat->tgl_lahir)) }}">
                 @error('tgl_lahir')
                     <div class="alert alert-danger mt-2">
-                        Wajib isi tanggal
+                        {{ $message }}
                     </div>
                 @enderror
             </div>
 
     <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
-    <button type="reset" class="btn btn-md btn-danger">RESET</button>
     <a href="{{ route('perawat.index') }}" class="btn btn-md btn-warning">KEMBALI</a>
     </form>
     </div>

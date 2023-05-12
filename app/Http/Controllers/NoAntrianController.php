@@ -42,9 +42,10 @@ class NoAntrianController extends Controller
             'nama'=>'required',
             'tgl_berobat'=>'required|date_format:Y-m-d',
            ],[
-            'no_antrian.unique'=>'Kode telah terdaftar',    
+            'no_antrian.unique'=>'Kode telah terdaftar',
+            'no_antrian.required'=>'no harus di isi ',
             'nama.required'=>'Nama harus di isi',
-            'tgl_berobat.date_format'=>'tanggal berobat harus di isi',
+            'tgl_berobat.required'=>'tanggal berobat harus di isi',
            ]);
            $tgl_berobat_formatted = date('d-m-Y', strtotime($request->tgl_berobat));
            no_antrian::create([
@@ -53,7 +54,7 @@ class NoAntrianController extends Controller
             'tgl_berobat'=>$tgl_berobat_formatted,
 
            ]);
-           return redirect()->route('no_antrian.index');
+           return redirect()->route('no_antrian.index')->with('success','Data Berhasil Terkirim');
     }
 
     /**
@@ -98,7 +99,7 @@ class NoAntrianController extends Controller
                 'nama'=>$request->nama,
                 'tgl_berobat'=>$tgl_berobat_formatted,
             ]);
-        return redirect()->route('no_antrian.index')->with(['success' =>'Data berhasil Di ubah!']);
+        return redirect()->route('no_antrian.index')->with('update' ,'Data berhasil Di ubah!');
     }
 
     /**

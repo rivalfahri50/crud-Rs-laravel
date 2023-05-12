@@ -29,7 +29,7 @@
         <!-- error message untuk title -->
         @error('no_antrian')
             <div class="alert alert-danger mt-2">
-                No antrian wajib di isi
+                {{ $message }}
         @enderror
     </div>
     <div class="form-group">
@@ -39,7 +39,7 @@
         <!-- error message untuk title -->
         @error('nama')
             <div class="alert alert-danger mt-2">
-               Nama harus Di isi
+                {{ $message }}
             </div>
         @enderror
     </div>
@@ -50,7 +50,7 @@
         <!-- error message untuk title -->
         @error('tgl_berobat')
             <div class="alert alert-danger mt-2">
-                Tanggal Harus Diisi
+                {{ $message }}
             </div>
         @enderror
     </div>
@@ -59,7 +59,6 @@
 
 
     <button type="submit" class="btn btn-md btn-primary">TAMBAH</button>
-    <button type="reset" class="btn btn-md btn-warning">RESET</button>
     <a class="btn btn-md btn-danger"href="{{ route('no_antrian.index') }}">KEMBALI</a>
 
 </form>

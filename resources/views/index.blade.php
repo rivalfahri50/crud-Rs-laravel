@@ -9,6 +9,7 @@
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="{{ asset ('assets/favicon.ico')}}" />
         <!-- Font Awesome icons (free version)-->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="{{ asset ('https://use.fontawesome.com/releases/v6.3.0/js/all.js')}}" crossorigin="anonymous"></script>
         <!-- Google fonts-->
         <link href="{{ asset ('https://fonts.googleapis.com/css?family=Montserrat:400,700')}}" rel="stylesheet" type="text/css" />
@@ -16,8 +17,14 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{{ asset ('css/styles.css')}}" rel="stylesheet" />
         <link rel="stylesheet" href="{{  asset ('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="')}} crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Swal.fire('Femas    ')
+        </script>
     </head>
+
     <body id="page-top">
+
         <!-- Navigation-->
                             <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
                                 <div class="container">
@@ -68,6 +75,12 @@
         </div>
         <!-- Bootstrap core JS-->
         <script src="{{ asset ('https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js')}}"></script>
+
+        @if (Session::get('successlgn'))
+            <script>
+                alert('Berhasil')
+            </script>
+        @endif
         <!-- Core theme JS-->
         <script src="{{ asset ('js/scripts.js')}}"></script>
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
@@ -76,4 +89,5 @@
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="{{ asset ('https://cdn.startbootstrap.com/sb-forms-latest.js')}}"></script>
     </body>
+
 </html>
