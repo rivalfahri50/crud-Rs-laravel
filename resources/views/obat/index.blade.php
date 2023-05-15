@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="{{  asset ('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="')}} crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Obat</title>
 </head>
-<body>
+<body style="background-color: rgb(0, 255, 200);">
     @if(Session::get('success'))
     <script>alert("Berhasil menambah data!   ")</script>
 @endif
@@ -54,8 +54,14 @@
     <div class="container mt-5">
         <br>
         <h2 class="text-center">OBAT</h2>
-    &nbsp; &nbsp;<a href="{{ route('obat.create') }}" class="btn btn-primary">Add Data</a>
+    &nbsp; &nbsp;<a href="{{ route('obat.create') }}" class="btn btn-warning">Add Data</a>
+    <div class="row" style="justify-content:end; float: right;">
+        <form action="/obat" method="GET">
+            <input type="search" placeholder="cari" name="search">
+        </form>
+    </div>
     <hr>
+    <div class="card border-0 shadow rounded">
 <table class="table table-striped">
      @php
     $i=1;
@@ -77,9 +83,9 @@
             Aksi
         </td>
     </tr>
-    @forelse ($obats as $obat )
+    @forelse ($obats as $key => $obat )
     <tr>
-        <td>{{ $i++ }}</td>
+        <td>{{ $obats->firstItem()+  $key }}</td>
         <td>
            {{$obat->keluhan}}
         </td>
@@ -112,9 +118,6 @@
                 .then((willDelete) => {
                     if (willDelete) {
                         document.getElementById("delete-form-"+id).submit(); // submit form jika user mengklik tombol "Ya"
-                        swal("Data berhasil dihapus",{
-                    icon:"success",
-                    });
 
                 } else {
                     swal("Data perawat tidak dihapus.");
@@ -127,7 +130,7 @@
                 @empty
                 @endforelse
            </table>
-        </div>
            {{ $obats->links() }}
+        </div>
         </body>
         </html>

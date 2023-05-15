@@ -21,7 +21,7 @@
 
     <div class="mb-3">
     <label class="form-label fw-bold">No antrian</label>
-    <input type="text" class="form-control @error('no_antrian') is-invalid @enderror" name="no_antrian" value="{{ old('no_antrian', $no_antrian->no_antrian) }}"
+    <input type="number" class="form-control @error('no_antrian') is-invalid @enderror" name="no_antrian" value="{{ old('no_antrian', $no_antrian->no_antrian) }}"
     placeholder="Masukkan nomer">
     <!-- error message untuk title -->
     @error('no_antrian')

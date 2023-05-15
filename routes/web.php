@@ -38,7 +38,7 @@ Route::resource('/perawat', App\Http\Controllers\PerawatController::class)->midd
 Route::resource('/dokter', App\Http\Controllers\DokterController::class)->middleware('Ceklogin');
 Route::resource('/no_antrian', App\Http\Controllers\NoAntrianController::class)->middleware('Ceklogin');
 Route::resource('/pasien', App\Http\Controllers\PasienController::class)->middleware('Ceklogin');
-Route::resource('/obat', App\Http\Controllers\ObatController::class)->middleware('Ceklogin');
+Route::resource('/obat', App\Http\Controllers\ObatController::class)->middleware('Ceklogin')    ;
 
 
 

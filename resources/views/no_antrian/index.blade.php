@@ -20,13 +20,17 @@
 <link rel="stylesheet" href="{{  asset ('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="')}} crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Perawat</title>
 </head>
-<body>
+<body style="background-color: rgb(0, 255, 200);">
+
     @if(Session::get('success'))
     <script>alert("Berhasil menambah data!   ")</script>
 @endif
 @if(Session::get('update'))
 <script>alert("Berhasil merubah data!  ")</script>
 @endif
+@error('antrianerror')
+    {{ $message }}
+@enderror
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
         <div class="container">
             <a class="navbar-brand" href="#page-top">Selamat datang</a>
@@ -54,8 +58,14 @@
     <div class="container mt-5">
         <br>
         <h2 class="text-center">NOANTRIAN</h2>
-    &nbsp; &nbsp;<a href="{{ route('no_antrian.create') }}" class="btn btn-primary">Add Data</a>
+    &nbsp; &nbsp;<a href="{{ route('no_antrian.create') }}" class="btn btn-warning">Add Data</a>
+    <div class="row" style="justify-content:end; float: right;">
+        <form action="/no_antrian" method="GET">
+            <input type="search" placeholder="cari" name="search">
+        </form>
+    </div>
     <hr>
+    <div class="card border-0 shadow rounded">
 <table class="table table-striped">
     @php
     $i=1;
@@ -77,9 +87,9 @@
             Aksi
         </td>
     </tr>
-    @forelse ($no_antrians as $no_antrian )
+    @forelse ($no_antrians as $key => $no_antrian )
     <tr>
-        <td>{{ $i++ }}</td>
+        <td>{{$no_antrians->firstItem()+  $key  }}</td>
         <td>
            {{$no_antrian->no_antrian}}
         </td>
@@ -112,9 +122,7 @@
                 .then((willDelete) => {
                     if (willDelete) {
                         document.getElementById("delete-form-"+id).submit(); // submit form jika user mengklik tombol "Ya"
-                        swal("Data berhasil dihapus",{
-                    icon:"success",
-                    });
+
 
                 } else {
                     swal("Data perawat tidak dihapus.");
@@ -127,7 +135,7 @@
                 @empty
                 @endforelse
            </table>
-        </div>
            {{ $no_antrians->links() }}
+        </div>
         </body>
         </html>

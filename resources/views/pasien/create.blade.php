@@ -35,13 +35,13 @@
     </div>
     <div class="form-group">
         <label class="font-weight-bold">No Antrian</label>
-        <select name="no_antrian" id="" class="form-control">
+        <select name="antrian_id" id="" class="form-control">
         @foreach ($no_antrians as $no_antrian)
-            <option value="{{ $no_antrian->no_antrian}}">{{ $no_antrian->no_antrian}}</option>
+            <option value="{{ $no_antrian->id}}">{{ $no_antrian->no_antrian}}</option>
 
         @endforeach
     </select>
-        @error('no_antrian')
+        @error('antrian_id')
             <div class="alert alert-danger mt-2">
                 {{ $message }}
             </div>

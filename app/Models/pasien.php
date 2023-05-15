@@ -2,15 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\no_antrian;
 use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class pasien extends Model
 {
     use HasFactory;
-    protected $fillable = [
+    protected $fillable = [ 
         'nama',
-        'no_antrian',
+        'antrian_id',
         'keluhan',
     ];
+    public function antrian(){
+        return $this->belongsTo(no_antrian::class, 'antrian_id');
+    }
 }

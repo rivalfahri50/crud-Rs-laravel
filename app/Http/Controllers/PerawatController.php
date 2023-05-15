@@ -13,10 +13,14 @@ class PerawatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $perawats=Perawat::latest()->paginate(5);
-        return view('perawat.index' , compact('perawats'));
+        if ($request->has('search')) {
+            $perawats = Perawat::where('nama','LIKE','%' .$request->search.'%')->paginate(4);
+           }else {
+            $perawats = Perawat::paginate(4);
+           }
+            return view('perawat.index' , compact('perawats'));
     }
 
     /**

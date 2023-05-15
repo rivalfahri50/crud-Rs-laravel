@@ -13,10 +13,14 @@ class ObatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $obats=obat::latest()->paginate(5);
-        return view('obat.index' , compact('obats'));
+        if ($request->has('search')) {
+            $obats = obat::where('keluhan','LIKE','%' .$request->search.'%')->paginate(4);
+           }else {
+            $obats = obat::paginate(4);
+           }
+            return view('obat.index' , compact('obats'));
     }
 
     /**

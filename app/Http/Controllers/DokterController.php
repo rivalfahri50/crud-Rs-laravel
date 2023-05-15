@@ -14,9 +14,13 @@ class DokterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $dokters=dokter::latest()->paginate(5);
+       if ($request->has('search')) {
+        $dokters = dokter::where('nama','LIKE','%' .$request->search.'%')->paginate(4);
+       }else {
+        $dokters = dokter::paginate(4);
+       }
         return view('dokter.index' , compact('dokters'));
     }
 

@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="{{  asset ('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="')}} crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Pasien</title>
 </head>
-<body>
+<body style="background-color: rgb(0, 255, 200);">
     @if(Session::get('success'))
     <script>alert("Berhasil menambah data!   ")</script>
 @endif
@@ -54,8 +54,14 @@
     <div class="container mt-5">
         <br>
         <h2 class="text-center">PASIEN</h2>
-    &nbsp; &nbsp;<a href="{{ route('pasien.create') }}" class="btn btn-primary">Add Data</a>
+    &nbsp; &nbsp;<a href="{{ route('pasien.create') }}" class="btn btn-warning">Add Data</a>
+    <div class="row" style="justify-content:end; float: right;">
+        <form action="/pasien" method="GET">
+            <input type="search" placeholder="cari" name="search">
+        </form>
+    </div>
     <hr>
+    <div class="card border-0 shadow rounded">
 <table class="table table-striped">
     @php
     $i=1;
@@ -68,7 +74,7 @@
             Nama Pasien
         </td>
         <td scope="col">
-            No Antrian
+            Antrian Id
         </td>
         <td scope="col">
             Keluhan
@@ -77,14 +83,14 @@
             Aksi
         </td>
     </tr>
-    @forelse ($pasiens as $pasien )
+    @forelse ($pasiens as $key => $pasien )
     <tr>
-        <td>{{ $i++ }}</td>
+        <td>{{ $pasiens->firstItem()+  $key  }}</td>
         <td>
            {{$pasien->nama}}
         </td>
         <td>
-            {{$pasien->no_antrian}}
+            {{$pasien->antrian->no_antrian}}
         </td>
         <td>
             {{$pasien->keluhan}}
@@ -112,9 +118,8 @@
                 .then((willDelete) => {
                     if (willDelete) {
                         document.getElementById("delete-form-"+id).submit(); // submit form jika user mengklik tombol "Ya"
-                        swal("Data berhasil dihapus",{
-                    icon:"success",
-                    });
+
+
 
                 } else {
                     swal("Data perawat tidak dihapus.");
@@ -127,7 +132,7 @@
                 @empty
                 @endforelse
            </table>
-        </div>
            {{ $pasiens->links() }}
+        </div>
         </body>
         </html>

@@ -14,9 +14,13 @@ class PasienController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $pasiens=pasien::latest()->paginate(5);
+         if ($request->has('search')) {
+        $pasiens = pasien::where('nama','LIKE','%' .$request->search.'%')->paginate(4);
+       }else {
+        $pasiens = pasien::paginate(4);
+       }
         return view('pasien.index' , compact('pasiens'));
     }
 
@@ -27,8 +31,8 @@ class PasienController extends Controller
      */
     public function create()
     {
-        $no_antrians=no_antrian::all();
-        return view ('pasien.create', compact('no_antrians'));
+        $no_antrians = no_antrian::all();
+     return view ('pasien.create', compact('no_antrians'));
     }
 
     /**
@@ -41,17 +45,17 @@ class PasienController extends Controller
     {
         $this->validate($request , [
             'nama'=>'required',
-            'no_antrian'=>'required|unique:pasiens',
+            'antrian_id'=>'required|unique:pasiens,antrian_id',
             'keluhan'=>'required',
            ],[
             'nama.required'=>'Nama harus di isi',
-            'no_antrian.required'=>'no harus diisi',
-            'no_antrian.unique'=>'Kode telah terdaftar',
+            'antrian_id.required'=>'no harus diisi',
+            'antrian_id.unique'=>'Kode telah terdaftar',
             'keluhan.required'=>'Keluhan harus di isi',
            ]);
            pasien::create([
             'nama'=>$request->nama,
-            'no_antrian'=>$request->no_antrian,
+            'antrian_id'=>$request->antrian_id,
             'keluhan'=>$request->keluhan,
 
            ]);
@@ -77,7 +81,8 @@ class PasienController extends Controller
      */
     public function edit(pasien $pasien)
     {
-        return view ('pasien.edit', compact('pasien'));
+        $antrians = no_antrian::all();
+        return view ('pasien.edit', compact('pasien','antrians'));
     }
 
     /**
@@ -91,13 +96,18 @@ class PasienController extends Controller
     {
         $this->validate($request,[
             'nama'=>'required',
-            'no_antrian'=>'required',
+            'antrian_id'=>'required|unique:pasiens,antrian_id,'.$pasien->antrian_id ,
             'keluhan'=>'required',
-        ]);
+        ],[
+            'nama.required'=>'Nama harus di isi',
+            'antrian_id.required'=>'no harus diisi',
+            'antrian_id.unique'=>'Kode telah terdaftar',
+            'keluhan.required'=>'Keluhan harus di isi',
+           ]);
 
             $pasien->update([
                 'nama'=>$request->nama,
-                'no_antrian'=>$request->no_antrian,
+                'antrian_id'=>$request->antrian_id,
                 'keluhan'=>$request->keluhan,
             ]);
         return redirect()->route('pasien.index')->with('update','Data berhasil Di ubah!');

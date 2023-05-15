@@ -31,17 +31,21 @@
         </div>
 
 
-    <div class="mb-3">
-    <label class="form-label fw-bold">No antrian</label>
-    <input type="text" class="form-control @error('no_antrian') is-invalid @enderror" name="no_antrian" value="{{ old('no_antrian', $pasien->no_antrian) }}"
-    placeholder="Masukkan nomer">
-    <!-- error message untuk title -->
-    @error('no_antrian')
-    <div class="alert alert-danger mt-2">
-        {{ $message }}
-    </div>
-    @enderror
-    </div>
+        <div class="form-group">
+            <label class="font-weight-bold">No Antrian</label>
+            <select name="antrian_id" id="" class="form-control">
+            @foreach ($antrians as $no_antrian)
+                <option value="{{ $no_antrian->id}}" {{ ($no_antrian->id == $pasien->antrian_id) ? "selected" : "" }}>{{ $no_antrian->no_antrian}}</option>
+
+            @endforeach
+        </select>
+            @error('antrian_id')
+                <div class="alert alert-danger mt-2">
+                    {{ $message }}
+                </div>
+            @enderror
+
+        </div>
 
 
 
