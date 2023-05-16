@@ -17,9 +17,9 @@
             <div class="col-md-7">
                 <div class="max">
                     <h3 class="card-header text-center">Login</h3>
-                    
+
                     @if(\Session::has('message'))
-                        <div class="alert alert-info">
+                        <div class="alert alert-danger">
                             {{\Session::get('message')}}
                         </div>
                     @endif
@@ -42,7 +42,7 @@
 
                             <div class="d-gird mx-auto text-center">
                                 belum punya akun? <a href="signup">Registrasi</a>
-                            </div>
+                            </div><br>
                                 <div class="d-grid mx-auto text-center">
                                 <button type="submit" class="btn btn-dark btn-block" href="/nyoba">Login</button>
                                 </div>

@@ -17,6 +17,8 @@ class PerawatController extends Controller
     {
         if ($request->has('search')) {
             $perawats = Perawat::where('nama','LIKE','%' .$request->search.'%')->paginate(4);
+            $perawats->appends(['search' => $request->search]);
+            session(['search' => $request->search]);
            }else {
             $perawats = Perawat::paginate(4);
            }

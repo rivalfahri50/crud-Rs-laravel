@@ -16,9 +16,11 @@ class ObatController extends Controller
     public function index(Request $request)
     {
         if ($request->has('search')) {
-            $obats = obat::where('keluhan','LIKE','%' .$request->search.'%')->paginate(4);
+            $obats = obat::where('keluhan','LIKE','%' .$request->search.'%')->paginate(1);
+            $obats->appends(['search' => $request->search]);
+            session(['search' => $request->search]);
            }else {
-            $obats = obat::paginate(4);
+            $obats = obat::paginate(1);
            }
             return view('obat.index' , compact('obats'));
     }

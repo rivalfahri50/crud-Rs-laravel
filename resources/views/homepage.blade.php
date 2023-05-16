@@ -5,6 +5,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    @extends('home')
+@section('content')
     <nav class="navbar navbar-light navbar-expand-lg mb-5" style="background-color: #0dcaf0;">
         <div class="container">
             <a class="navbar-brand mr-auto" href="#">Cairocoders</a>

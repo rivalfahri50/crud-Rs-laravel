@@ -32,13 +32,17 @@ Route::get('/dashboard', function () {
     return view('index')->middleware('hakAkses');
 
 });
+Route::middleware([ 'hakAkses'])->group(function () {
+    Route::resource('/perawat', App\Http\Controllers\PerawatController::class);
+    Route::resource('/dokter', App\Http\Controllers\DokterController::class);
+    Route::resource('/no_antrian', App\Http\Controllers\NoAntrianController::class);
+    Route::resource('/pasien', App\Http\Controllers\PasienController::class);
+    Route::resource('/obat', App\Http\Controllers\ObatController::class)  ;
 
 
-Route::resource('/perawat', App\Http\Controllers\PerawatController::class)->middleware('Ceklogin');
-Route::resource('/dokter', App\Http\Controllers\DokterController::class)->middleware('Ceklogin');
-Route::resource('/no_antrian', App\Http\Controllers\NoAntrianController::class)->middleware('Ceklogin');
-Route::resource('/pasien', App\Http\Controllers\PasienController::class)->middleware('Ceklogin');
-Route::resource('/obat', App\Http\Controllers\ObatController::class)->middleware('Ceklogin')    ;
+
+});
+
 
 
 

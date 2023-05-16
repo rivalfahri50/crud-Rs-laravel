@@ -21,7 +21,12 @@
     <title>Perawat</title>
 </head>
 <body style="background-color: rgb(0, 255, 200);">
-
+            return back()->withErrors(['antrianerror' => 'Data ini masih digunakan']);
+@error('antrianerror')
+    <script>
+        swal("Data Berhasil Di hapus")
+    </script>
+@enderror
     @if(Session::get('success'))
     <script>alert("Berhasil menambah data!   ")</script>
 @endif
@@ -57,11 +62,12 @@
     <br>
     <div class="container mt-5">
         <br>
-        <h2 class="text-center">NOANTRIAN</h2>
+        <h2 class="text-center">Data NoAntrian</h2>
     &nbsp; &nbsp;<a href="{{ route('no_antrian.create') }}" class="btn btn-warning">Add Data</a>
     <div class="row" style="justify-content:end; float: right;">
         <form action="/no_antrian" method="GET">
-            <input type="search" placeholder="cari" name="search">
+            <label for="search">Search :</label>
+            <input type="search" placeholder="cari" name="search" value="{{ session('search') }}"autofocus>
         </form>
     </div>
     <hr>
@@ -75,10 +81,10 @@
             No
         </td>
         <td scope="col">
-            No Antrian
+            Nama Pasien
         </td>
         <td scope="col">
-          Nama Pasien
+            No Antrian
         </td>
         <td scope="col">
             Tanggal Berobat
@@ -91,11 +97,11 @@
     <tr>
         <td>{{$no_antrians->firstItem()+  $key  }}</td>
         <td>
-           {{$no_antrian->no_antrian}}
-        </td>
-        <td>
             {{$no_antrian->nama}}
         </td>
+        <td>
+            {{$no_antrian->no_antrian}}
+         </td>
         <td>
             {{$no_antrian->tgl_berobat}}
         </td>
@@ -108,6 +114,17 @@
             </form>
         </center>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        @error('antrianerror')
+        <script>
+            swal('Data masih digunakan')
+        </script>
+
+        @enderror
+        @if (Session::get('successhapus'))
+        <script>
+            swal('Data Berhasil di hapus')
+        </script>
+        @endif
         <script>
             function showAlert(event, id) {
                 event.preventDefault(); // menghentikan proses submit form
@@ -125,7 +142,7 @@
 
 
                 } else {
-                    swal("Data perawat tidak dihapus.");
+                    swal("Data no_antrian tidak dihapus.");
                 }
             });
         }

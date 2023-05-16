@@ -53,11 +53,12 @@
     <br>
     <div class="container mt-5">
         <br>
-        <h2 class="text-center">OBAT</h2>
+        <h2 class="text-center">Data Obat</h2>
     &nbsp; &nbsp;<a href="{{ route('obat.create') }}" class="btn btn-warning">Add Data</a>
     <div class="row" style="justify-content:end; float: right;">
         <form action="/obat" method="GET">
-            <input type="search" placeholder="cari" name="search">
+            <label for="search">Search :</label>
+            <input type="search" placeholder="cari" name="search" value="{{ session('search') }}" autofocus>
         </form>
     </div>
     <hr>
@@ -118,9 +119,9 @@
                 .then((willDelete) => {
                     if (willDelete) {
                         document.getElementById("delete-form-"+id).submit(); // submit form jika user mengklik tombol "Ya"
-
+                        swal("Data Berhasil Di hapus")
                 } else {
-                    swal("Data perawat tidak dihapus.");
+                    swal("Data obat tidak dihapus.");
                 }
             });
         }

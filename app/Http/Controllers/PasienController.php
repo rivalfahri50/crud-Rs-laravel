@@ -18,6 +18,8 @@ class PasienController extends Controller
     {
          if ($request->has('search')) {
         $pasiens = pasien::where('nama','LIKE','%' .$request->search.'%')->paginate(4);
+        $pasiens->appends(['search' => $request->search]);
+        session(['search' => $request->search]);
        }else {
         $pasiens = pasien::paginate(4);
        }

@@ -18,6 +18,8 @@ class DokterController extends Controller
     {
        if ($request->has('search')) {
         $dokters = dokter::where('nama','LIKE','%' .$request->search.'%')->paginate(4);
+        $dokters->appends(['search' => $request->search]);
+        session(['search' => $request->search]);
        }else {
         $dokters = dokter::paginate(4);
        }

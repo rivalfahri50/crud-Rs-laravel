@@ -13,7 +13,7 @@ class CustomAuthController extends Controller
 {
     public function home()
     {
-        return view('home');
+        return view('homepage');
     }
 
     public function index()

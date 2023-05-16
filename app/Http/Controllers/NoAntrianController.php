@@ -18,7 +18,9 @@ class NoAntrianController extends Controller
     {
         if ($request->has('search')) {
         $no_antrians = no_antrian::where('nama','LIKE','%' .$request->search.'%')->paginate(4);
-       }else {
+        $no_antrians->appends(['search' => $request->search]);
+        session(['search' => $request->search]);
+        }else {
         $no_antrians = no_antrian::paginate(4);
        }
         return view('no_antrian.index' , compact('no_antrians'));
@@ -122,7 +124,7 @@ class NoAntrianController extends Controller
     {
         try {
             $no_antrian->delete();
-            return  redirect()->route('no_antrian.index');
+            return  redirect()->route('no_antrian.index')->with('successhapus','berhasil menghapus');
         }
         catch (QueryException $e) {
             return back()->withErrors(['antrianerror' => 'Data ini masih digunakan']);

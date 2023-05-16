@@ -18,9 +18,7 @@
         <link href="{{ asset ('css/styles.css')}}" rel="stylesheet" />
         <link rel="stylesheet" href="{{  asset ('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="')}} crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script>
-            Swal.fire('Femas    ')
-        </script>
+
     </head>
 
     <body id="page-top">
@@ -52,7 +50,7 @@
                                         <!-- Masthead Avatar Image-->
                                         <img class="masthead-avatar mb-5" src="assets/img/avataaars.svg" alt="..." />
                                         <!-- Masthead Heading-->
-                                        <h1 class="masthead-heading text-uppercase mb-0">Rumah Sakit</h1>
+                                        <h1 class="masthead-heading text-uppercase mb-2">Rumah Sakit</h1>
                                         <!-- Icon Divider-->
                                         <div class="divider-custom divider-light">
                                             <div class="divider-custom-line"></div>
@@ -78,7 +76,7 @@
 
         @if (Session::get('successlgn'))
             <script>
-                alert('Berhasil')
+                alert('Berhasil Login')
             </script>
         @endif
         <!-- Core theme JS-->
