@@ -5,8 +5,8 @@
 <script>alert("Berhasil Registrasi!")</script>
 @endif
 <div class="bg-image"
-     style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
-            height: 100vh">
+     style="background-image: url('https://rumahsakit.usu.ac.id/wp-content/uploads/2022/10/medical.jpg');
+            height: 150vh">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @extends('layout')
 @section('content')
@@ -26,7 +26,7 @@
 
                         <form method="POST" action="{{ route('postlogin') }}">
                             @csrf
-                            <div class="form-group mb-3 ">Email
+                            <div class="form-group mb-3 "><b>Email
                                 <input type="text" placeholder="Email"  id="email" class="form-control" name="email" value="{{ old('email') }}"
                                     autofocus>
                                 @if ($errors->has('email'))

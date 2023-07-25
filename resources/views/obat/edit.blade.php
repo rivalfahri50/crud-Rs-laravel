@@ -7,7 +7,7 @@
     <title>Tambah Data Blog - SantriKoding.com</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-<body style="background: rgb(0, 255, 136)">
+<body style="background-color: #00CED1;">
 
     <div class="container mt-5 mb-5">
         <div class="row">

@@ -56,7 +56,7 @@ class ObatController extends Controller
 
            ],[
             'keluhan.required'=>'keluhan harus di isi',
-            'tg_beroba.required'=>'Tanggall harus di isi',
+            'tgl_berobat.required'=>'Tanggall harus di isi',
             'biaya.required'=>'biaya harus di isi',
            ]);
            return redirect()->route('obat.index')->with('success','Data Berhasil Terkirim');
@@ -84,13 +84,6 @@ class ObatController extends Controller
         return view ('obat.edit', compact('obat'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateobatRequest  $request
-     * @param  \App\Models\obat  $obat
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, obat $obat)
     {
         $this->validate($request,[

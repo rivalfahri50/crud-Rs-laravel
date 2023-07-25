@@ -14,29 +14,16 @@
             <div class="col-md-12">
                 <div class="card border-0 shadow rounded">
                     <div class="card-body">
-<form action="{{ route('no_antrian.update', $no_antrian->id) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('alat_kesehatan.update', $alat_kesehatan->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
 
-
     <div class="mb-3">
-    <label class="form-label fw-bold">No antrian</label>
-    <input type="number" class="form-control @error('no_antrian') is-invalid @enderror" name="no_antrian" value="{{ old('no_antrian', $no_antrian->no_antrian) }}"
-    placeholder="Masukkan nomer">
-    <!-- error message untuk title -->
-    @error('no_antrian')
-    <div class="alert alert-danger mt-2">
-        {{ $message }}
-    </div>
-    @enderror
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label fw-bold">Nama Pasien</label>
-        <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama', $no_antrian->nama) }}"
-        placeholder="Masukkan nomer">
+        <label class="form-label fw-bold">Nama Alat</label>
+        <input type="text" class="form-control @error('nama_alat') is-invalid @enderror" name="nama_alat" value="{{ old('nama_alat', $alat_kesehatan->nama_alat) }}"
+        placeholder="Masukkan nama_alat">
         <!-- error message untuk title -->
-        @error('nama')
+        @error('nama_alat')
         <div class="alert alert-danger mt-2">
             {{ $message }}
         </div>
@@ -44,20 +31,19 @@
         </div>
 
         <div class="mb-3">
-            <label class="form-label fw-bold">Tanggal Berobat</label>
-            <input type="date" name="tgl_berobat" id="" class="form-control"
-                value="{{ date('Y-m-d', strtotime($no_antrian->tgl_berobat)) }}">
-            @error('tgl_berobat')
-                <div class="alert alert-danger mt-2">
-                    {{ $message }}
-                </div>
+            <label class="form-label fw-bold">Jumlah Alat</label>
+            <input type="text" class="form-control @error('jumlah_alat') is-invalid @enderror" name="jumlah_alat" value="{{ old('jumlah_alat', $alat_kesehatan->jumlah_alat) }}"
+            placeholder="Masukkan jumlah_alat">
+            <!-- error message untuk title -->
+            @error('jumlah_alat')
+            <div class="alert alert-danger mt-2">
+                {{ $message }}
+            </div>
             @enderror
-        </div>
-
-
+            </div>
 
     <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
-    <a href="{{ route('no_antrian.index') }}" class="btn btn-md btn-warning">KEMBALI</a>
+    <a href="{{ route('alat_kesehatan.index') }}" class="btn btn-md btn-warning">KEMBALI</a>
     </form>
     </div>
     </div>

@@ -16,7 +16,7 @@
     }
 </style>
 <div class="bg-image"
-     style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
+     style="background-image: url('https://rumahsakit.usu.ac.id/wp-content/uploads/2022/10/medical.jpg');
             height: 100vh">
 
 @extends('layout')
@@ -40,7 +40,7 @@
                     <div class="card-body">
                         <form action="{{ route('postsignup') }}" method="POST">
                             @csrf
-                            <div class="form-group mb-3">Name
+                            <div class="form-group mb-3"><b>Name
                                 <input type="text" placeholder="Name" id="name" class="form-control" name="name" value="{{ old('name') }}" autofocus>
                                 @if ($errors->has('name'))
                                 <span class="text-danger">{{ $errors->first('name') }}</span>

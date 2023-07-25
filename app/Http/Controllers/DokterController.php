@@ -139,10 +139,8 @@ class DokterController extends Controller
      */
     public function destroy(dokter $dokter)
     {
-
-        unlink(public_path('storage/dkt/'.$dokter->image));
-      $dokter->delete();
-
-      return redirect()->route('dokter.index');
+    unlink(public_path('storage/dkt/'.$dokter->image));
+    $dokter->delete();
+    return redirect()->route('dokter.index');
     }
 }

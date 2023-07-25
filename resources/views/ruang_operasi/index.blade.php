@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +19,8 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="{{ asset ('css/styles.css')}}" rel="stylesheet" />
 <link rel="stylesheet" href="{{  asset ('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="')}} crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Obat</title>
+   <br>
+<title>R.Operasi</title>
 </head>
 <body style="background-color: #C0C0C0;">
     @if(Session::get('success'))
@@ -55,87 +57,88 @@
     <br>
 
     <br>
-    <div class="container mt-5">
-        <br>
-        <h2 class="text-center">Data Obat</h2>
-    &nbsp; &nbsp;<a href="{{ route('obat.create') }}" class="btn btn-warning">Add Data</a>
+
+<div class="container mt-5">
+    <br>
+    <h2 class="text-center">Data R.Operasi</h2>
+    &nbsp; &nbsp;<a href="{{ route('ruang_operasi.create') }}" class="btn btn-warning">Add Data</a>
     <div class="row" style="justify-content:end; float: right;">
-        <form action="/obat" method="GET">
+        <form action="/ruang_operasi" method="GET">
             <label for="search">Search :</label>
-            <input type="search" placeholder="cari" name="search" value="{{ session('search') }}" autofocus>
+            <input type="search" placeholder="cari" name="search" value="{{ session('search') }}" autocomplete="">
         </form>
     </div>
-    <hr>
-    <div class="card border-0 shadow rounded">
+ <hr>
+ <div class="card border-0 shadow rounded">
 <table class="table table-striped">
-     @php
-    $i=1;
-@endphp
+    @php
+        $i=1;
+    @endphp
     <tr>
-        <td scope="col ">
+        <td scope="col">
             No
         </td>
         <td scope="col">
-            Keluhan
+            No Ruang
         </td>
         <td scope="col">
-            Tanggal Berobat
+          Status
         </td>
-        <td scope="col">
-            Biaya
-        </td>
+
         <td scope="col">
             Aksi
         </td>
     </tr>
-    @forelse ($obats as $key => $obat )
+    @forelse ($ruang_operasis as $key => $ruang_operasi )
     <tr>
-        <td>{{ $obats->firstItem()+  $key }}</td>
+        <td>{{$ruang_operasis->firstItem()+  $key  }}</td>
         <td>
-           {{$obat->keluhan}}
+           {{$ruang_operasi->no_ruang}}
         </td>
         <td>
-            {{$obat->tgl_berobat}}
+            {{$ruang_operasi->status}}
         </td>
-        <td>
-            {{$obat->biaya}}
-        </td>
-        <td>
-            <form id="delete-form-{{ $obat->id }}" action="{{route('obat.destroy', $obat->id) }}" method="POST">
-              @csrf
-              @method('DELETE')
-              <a href="{{ route('obat.edit',$obat->id) }}" class="btn btn-primary">Edit</a>
-              <button type="submit" class="btn btn-danger" onclick="showAlert(event, {{ $obat->id }})">Delete</button>
-            </form>
-        </center>
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-        <script>
-            function showAlert(event, id) {
-                event.preventDefault(); // menghentikan proses submit form
 
-                swal({
-                    title: "Apakah anda yakin?",
-                    text: "Data obat akan dihapus secara permanen!",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        document.getElementById("delete-form-"+id).submit(); // submit form jika user mengklik tombol "Ya"
-                        swal("Data Berhasil Di hapus")
+        <td>
+
+
+          <form id="delete-form-{{ $ruang_operasi->id }}" action="{{route('ruang_operasi.destroy', $ruang_operasi->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <a href="{{ route('ruang_operasi.edit',$ruang_operasi->id) }}" class="btn btn-primary">Edit</a>
+            <button type="submit" class="btn btn-danger" onclick="showAlert(event, {{ $ruang_operasi->id }})">Delete</button>
+        </form>
+    </center>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        function showAlert(event, id) {
+            event.preventDefault(); // menghentikan proses submit form
+
+            swal({
+                title: "Apakah anda yakin?",
+                text: "Data ruang operasi akan dihapus secara permanen!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    document.getElementById("delete-form-"+id).submit(); // submit form jika user mengklik tombol "Ya"
+                    swal("Data Berhasil Di hapus")
                 } else {
-                    swal("Data obat tidak dihapus.");
+                    swal("Data ruang operasi tidak dihapus.");
                 }
+
             });
         }
-        </script>
-                        </td>
-                    </tr>
-                @empty
-                @endforelse
-           </table>
-           {{ $obats->links() }}
-        </div>
-        </body>
-        </html>
+    </script>
+                    </td>
+                </tr>
+            @empty
+            @endforelse
+       </table>
+       {{ $ruang_operasis->links() }}
+    </div>
+</div>
+    </body>
+    </html>

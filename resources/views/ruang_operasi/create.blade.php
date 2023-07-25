@@ -13,57 +13,43 @@
             <div class="col-md-12">
                 <div class="card border-0 shadow rounded">
                     <div class="card-body">
-    <title>Perawat</title>
+    <title>Ruang Operasi</title>
 </head>
 <body>
-<form action="{{ route('pasien.store') }}" method="post">
+<form action="{{ route('ruang_operasi.store') }}" method="post">
     @csrf
     @csrf
 
 
     <div class="form-group">
-        <label class="font-weight-bold">Nama Pasien</label>
-        <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}" placeholder="Masukkan Nama Pasien">
+        <label class="font-weight-bold">No Ruang</label>
+        <input type="number" class="form-control @error('no_ruang') is-invalid @enderror" name="no_ruang" value="{{ old('no_ruang') }}" placeholder="Masukkan no_ruang">
 
         <!-- error message untuk title -->
-        @error('nama')
+        @error('no_ruang')
             <div class="alert alert-danger mt-2">
                 {{ $message }}
             </div>
         @enderror
     </div>
     <div class="form-group">
-        <label class="font-weight-bold">No Antrian</label>
-        <select name="antrian_id" id="" class="form-control">
-        @foreach ($no_antrians as $no_antrian)
-            <option value="{{ $no_antrian->id}}">{{ $no_antrian->no_antrian}}</option>
-
-        @endforeach
-    </select>
-        @error('antrian_id')
-            <div class="alert alert-danger mt-2">
-                {{ $message }}
-            </div>
-        @enderror
-
-    </div>
-    <div class="form-group">
-        <label class="font-weight-bold">Keluhan</label>
-        <input type="text" class="form-control @error('keluhan') is-invalid @enderror" name="keluhan" value="{{ old('keluhan') }}" placeholder="Masukan keluhan Anda" >
+        <label class="font-weight-bold">Status</label>
+        <input type="text" class="form-control @error('status') is-invalid @enderror" name="status" value="{{ old('status') }}" placeholder="Masukkan status">
 
         <!-- error message untuk title -->
-        @error('keluhan')
+        @error('status')
             <div class="alert alert-danger mt-2">
                 {{ $message }}
             </div>
         @enderror
     </div>
+
 
 
 
 
     <button type="submit" class="btn btn-md btn-primary">TAMBAH</button>
-    <a class="btn btn-md btn-danger"href="{{ route('pasien.index') }}">KEMBALI</a>
+    <a class="btn btn-md btn-danger"href="{{ route('ruang_operasi.index') }}">KEMBALI</a>
 
 </form>
 </div>

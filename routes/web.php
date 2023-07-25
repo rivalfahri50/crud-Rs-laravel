@@ -29,7 +29,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('index')->middleware('hakAkses');
+    return view('index')->middleware=('hakAkses');
 
 });
 Route::middleware([ 'hakAkses'])->group(function () {
@@ -38,6 +38,16 @@ Route::middleware([ 'hakAkses'])->group(function () {
     Route::resource('/no_antrian', App\Http\Controllers\NoAntrianController::class);
     Route::resource('/pasien', App\Http\Controllers\PasienController::class);
     Route::resource('/obat', App\Http\Controllers\ObatController::class)  ;
+    Route::resource('/satpam', App\Http\Controllers\SatpamController::class)  ;
+    Route::resource('/ruang_operasi', App\Http\Controllers\RuangOperasiController::class)  ;
+    Route::resource('/pembayaran', App\Http\Controllers\PembayaranController::class)  ;
+    Route::resource('/kunjungan', App\Http\Controllers\KunjunganController::class)  ;
+    Route::resource('/jadwal_dokter', App\Http\Controllers\JadwalDokterController::class)  ;
+    Route::resource('/alat_kesehatan', App\Http\Controllers\AlatKesehatanController::class)  ;
+    Route::put('/ruang_operasi/{id}', 'RuangOperasiController@update')->name('ruang_operasi.update');
+
+
+
 
 
 
@@ -47,6 +57,7 @@ Route::middleware([ 'hakAkses'])->group(function () {
 
 
 Route::get('/', [CustomAuthController::class, 'home']);
+Route::get('/registration',[CustomAuthController::class,'signup'])->name('registration');
 Route::get('dashboard', [CustomAuthController::class, 'dashboard'])->middleware('hakAkses');
 Route::get('login', [CustomAuthController::class, 'index'])->name('login');
 Route::post('postlogin', [CustomAuthController::class, 'login'])->name('postlogin');
