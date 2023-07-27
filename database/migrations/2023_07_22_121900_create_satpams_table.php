@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nama');
             $table->text('alamat');
             $table->string('no_hp');
-            $table->integer('umur');
+            $table->string('umur');
             $table->timestamps();
         });
     }

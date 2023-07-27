@@ -25,32 +25,30 @@ class SatpamController extends Controller
     }
 
     public function store(Request $request)
-    {
-       $this->validate($request , [
-        'nama'=>'required',
-        'alamat'=>'required',
-        'no_hp'=>'required|min:12',
-        'umur'=>'required',
+    {$this->validate($request, [
+        'nama' => 'required',
+        'alamat' => 'required',
+        'no_hp' => 'required|unique:satpams|min:12',
+        'umur' => 'required',
+    ],[
+        'nama.required' => 'Nama harus diisi.',
+        'alamat.required' => 'Alamat harus diisi.',
+        'no_hp.required' => 'No HP harus diisi.',
+        'no_hp.unique' => 'No HP sudah ada dalam database.',
+        'no_hp.min' => 'No HP harus minimal 12 karakter.',
+        'umur.required'=>'umur harus diisi',
+    ]);
+
+    Satpam::create([
+        'nama' => $request->nama,
+        'alamat' => $request->alamat,
+        'no_hp' => $request->no_hp,
+        'umur' => $request->umur,
+    ]);
 
 
-       ],[
-        'nama.required'=>'Nama harus di isi',
-        'alamat.required'=>'jenis kelamin harus dipilih',
-        'no_hp'=>'no hp harus',
-
-
-       ]);
-       Satpam::create([
-        'nama'=>$request->nama,
-        'alamat'=>$request->alamat,
-        'no_hp'=>$request->no_hp,
-        'umur'=>$request->umur,
-
-
-       ]);
-
-
-       return redirect()->route('satpam.index')->with('success','Data Berhasil Terkirim');
+        
+       return redirect()->route('satpam.index')->with('success', 'Task Created Successfully!');
     }
 
     public function edit(Satpam $satpam)
@@ -59,18 +57,27 @@ class SatpamController extends Controller
     }
     public function update(Request $request, Satpam $satpam)
     {
-        $this->validate($request,[
-            'nama'=>'required',
-        'alamat'=>'required',
-        'no_hp'=>'required|min:12',
-        'umur'=>'required',
+        $this->validate($request, [
+            'nama' => 'required',
+            'alamat' => 'required',
+            'no_hp' => 'required|unique:satpams|min:12',
+            'umur' => 'required',
+        ], [
+            'nama.required' => 'Nama harus diisi.',
+            'alamat.required' => 'Alamat harus diisi.',
+            'no_hp.required' => 'No HP harus diisi.',
+            'no_hp.unique' => 'No HP sudah ada dalam database.',
+            'no_hp.min' => 'No HP harus memiliki panjang minimal 12 karakter.',
+            'umur.required' => 'Umur harus diisi.',
         ]);
-            $satpam->update([
-                'nama'=>$request->nama,
-        'alamat'=>$request->alamat,
-        'no_hp'=>$request->no_hp,
-        'umur'=>$request->umur,
-            ]);
+
+        $satpam->update([
+            'nama' => $request->nama,
+            'alamat' => $request->alamat,
+            'no_hp' => $request->no_hp,
+            'umur' => $request->umur,
+        ]);
+
         return redirect()->route('satpam.index')->with('update' ,'Data berhasil Di ubah!');
     }
 
@@ -80,5 +87,5 @@ class SatpamController extends Controller
         return  redirect()->route('satpam.index');
     }
 
-    
+
 }

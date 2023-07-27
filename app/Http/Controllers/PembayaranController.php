@@ -31,10 +31,11 @@ class PembayaranController extends Controller
         'nama_dokter'=>'required',
         'obat'=>'required',
         'jumlah_obat'=>'required',
-        'ruang'=>'required',
+        'ruang'=>'required|unique:pembayarans',
 
 
        ],[
+        'ruang.unique'=>'ruang sudah terpakai',
         'nama_pasien.required'=>'Nama harus di isi',
         'nama_dokter.required'=>'Nama harus di isi',
         'obat.required'=>'obat harus dipilih',
@@ -68,6 +69,13 @@ class PembayaranController extends Controller
         'obat'=>'required',
         'jumlah_obat'=>'required',
         'ruang'=>'required',
+        ],[
+            'ruang.unique'=>'ruang sudah terpakai',
+            'nama_pasien.required'=>'Nama harus di isi',
+            'nama_dokter.required'=>'Nama harus di isi',
+            'obat.required'=>'obat harus dipilih',
+            'jumlah_obat.required'=>'jumlah_obat harus diisi',
+            'ruang.required'=>'ruang harus diisi',
         ]);
             $pembayaran->update([
                 'nama_pasien'=>$request->nama_pasien,

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('jadwal__dokters', function (Blueprint $table) {
             $table->id();
             $table->string('nama_dokter');
-            $table->date('tanggal');
+            $table->string('tanggal');
             $table->string('ruang');
             $table->string('nama_pasien');
             $table->timestamps();

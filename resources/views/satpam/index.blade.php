@@ -23,12 +23,7 @@
 <title>Satpam</title>
 </head>
 <body style="background-color: #C0C0C0;">
-    @if(Session::get('success'))
-    <script>alert("Berhasil menambah data!   ")</script>
-@endif
-@if(Session::get('update'))
-<script>alert("Berhasil merubah data!  ")</script>
-@endif
+    
 <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
     <div class="container">
         <a class="navbar-brand" href="#page-top"></a>
@@ -149,6 +144,6 @@
        </table>
        {{ $satpams->links() }}
     </div>
-</div>
+</div>@include('sweetalert::alert')
     </body>
     </html>

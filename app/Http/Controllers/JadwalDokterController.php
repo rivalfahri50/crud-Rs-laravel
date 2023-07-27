@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class JadwalDokterController extends Controller
 {
-   
+
     public function index(Request $request)
     {
         if ($request->has('search')) {
@@ -30,7 +30,7 @@ class JadwalDokterController extends Controller
        $this->validate($request ,[
         'nama_dokter'=>'required',
         'tanggal'=>'required|date_format:Y-m-d',
-        'ruang'=>'required',
+        'ruang'=>'required|unique:jadwal__dokters',
         'nama_pasien'=>'required',
        ]);
        $tanggal_formatted = date('d-m-Y', strtotime($request->tanggal));
@@ -41,6 +41,7 @@ class JadwalDokterController extends Controller
         'nama_pasien'=>$request->nama_pasien,
 
        ],[
+            'ruang.unique'=>'ruang sedang di pakai',
             'nama_dokter.required'=>'Nama harus di isi',
             'tanggal.date_formatted'=>'tanggal harus dipilih',
             'ruang.required'=>'ruang harus diisi',
@@ -51,7 +52,7 @@ class JadwalDokterController extends Controller
 
        return redirect()->route('jadwal_dokter.index')->with('success','Data Berhasil Terkirim');
     }
-    
+
     public function edit(Jadwal_Dokter $jadwal_dokter)
     {
         return view('jadwal_dokter.edit', compact('jadwal_dokter'));
@@ -61,9 +62,10 @@ class JadwalDokterController extends Controller
         $this->validate($request,[
         'nama_dokter'=>'required',
         'tanggal'=>'required|date_format:Y-m-d',
-        'ruang'=>'required',
+        'ruang'=>'required|unique:jadwal__dokters',
         'nama_pasien'=>'required',
         ],[
+            'ruang.unique'=>'ruang sedang di pakai',
             'nama_dokter.required'=>'Nama harus di isi',
             'tanggal.date_formatted'=>'tanggal harus dipilih',
             'ruang.required'=>'ruang harus diisi',
@@ -75,7 +77,7 @@ class JadwalDokterController extends Controller
                 'tanggal'=>$tanggal_formatted,
                 'ruang'=>$request->ruang,
                 'nama_pasien'=>$request->nama_pasien,
-        
+
             ]);
 
         return redirect()->route('jadwal_dokter.index')->with('update' ,'Data berhasil Di ubah!');

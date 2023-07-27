@@ -43,6 +43,39 @@
             </div>
         @enderror
     </div>
+    <div class="form-group">
+        <label class="font-weight-bold">Nama Dokter</label>
+        <input type="text" class="form-control @error('nama_dokter') is-invalid @enderror" name="nama_dokter" value="{{ old('nama_dokter') }}" placeholder="Masukkan nama_dokter">
+
+        <!-- error message untuk title -->
+        @error('nama_dokter')
+            <div class="alert alert-danger mt-2">
+                {{ $message }}
+            </div>
+        @enderror
+    </div>
+    <div class="form-group">
+        <label class="font-weight-bold">Nama Pasien</label>
+        <input type="text" class="form-control @error('nama_pasien') is-invalid @enderror" name="nama_pasien" value="{{ old('nama_pasien') }}" placeholder="Masukkan nama_pasien">
+
+        <!-- error message untuk title -->
+        @error('nama_pasien')
+            <div class="alert alert-danger mt-2">
+                {{ $message }}
+            </div>
+        @enderror
+    </div>
+    <div class="form-group">
+        <label class="font-weight-bold">Nama Alat</label>
+        <input type="text" class="form-control @error('nama_alat') is-invalid @enderror" name="nama_alat" value="{{ old('nama_alat') }}" placeholder="Masukkan nama_alat">
+
+        <!-- error message untuk title -->
+        @error('nama_alat')
+            <div class="alert alert-danger mt-2">
+                {{ $message }}
+            </div>
+        @enderror
+    </div>
 
 
 

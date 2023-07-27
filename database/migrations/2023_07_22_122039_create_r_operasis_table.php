@@ -17,6 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('no_ruang');
             $table->string('status');
+            $table->string('nama_dokter');
+            $table->string('nama_pasien');
+            $table->string('nama_alat');
+
+
             $table->timestamps();
         });
     }

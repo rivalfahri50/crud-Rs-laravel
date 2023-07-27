@@ -40,6 +40,39 @@
             </div>
             @enderror
             </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold">Nama Dokter</label>
+                <input type="text" class="form-control @error('nama_dokter') is-invalid @enderror" name="nama_dokter" value="{{ old('nama_dokter', $ruang_operasi->nama_dokter) }}"
+                placeholder="Masukkan status">
+                <!-- error message untuk title -->
+                @error('nama_dokter')
+                <div class="alert alert-danger mt-2">
+                    {{ $message }}
+                </div>
+                @enderror
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Nama Pasien</label>
+                    <input type="text" class="form-control @error('nama_pasien') is-invalid @enderror" name="nama_pasien" value="{{ old('nama_pasien', $ruang_operasi->nama_pasien) }}"
+                    placeholder="Masukkan status">
+                    <!-- error message untuk title -->
+                    @error('nama_pasien')
+                    <div class="alert alert-danger mt-2">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Nama Alat</label>
+                        <input type="text" class="form-control @error('nama_alat') is-invalid @enderror" name="nama_alat" value="{{ old('nama_alat', $ruang_operasi->nama_alat) }}"
+                        placeholder="Masukkan status">
+                        <!-- error message untuk title -->
+                        @error('nama_alat')
+                        <div class="alert alert-danger mt-2">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                        </div>
 
 
 

@@ -69,11 +69,13 @@
 
 
 
-
-    <button type="submit" class="btn btn-md btn-primary">TAMBAH</button>
-    <a class="btn btn-md btn-danger"href="{{ route('satpam.index') }}">KEMBALI</a>
+  
+    <button type="submit" class="btn btn-md btn-primary" >TAMBAH</button>
+    <a class="btn btn-md btn-danger" href="{{ route('satpam.index') }}">KEMBALI</a>
 
 </form>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </div>
 </div>
 </div>
@@ -86,5 +88,6 @@
 <script>
 
 </script>
+@include('sweetalert::alert')
 </body>
 </html>

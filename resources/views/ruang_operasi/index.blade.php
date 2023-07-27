@@ -84,6 +84,15 @@
         <td scope="col">
           Status
         </td>
+        <td scope="col">
+            Nama Dokter
+          </td>
+          <td scope="col">
+            Nama Pasien
+          </td>
+          <td scope="col">
+            Nama Alat
+          </td>
 
         <td scope="col">
             Aksi
@@ -97,6 +106,15 @@
         </td>
         <td>
             {{$ruang_operasi->status}}
+        </td>
+        <td>
+            {{$ruang_operasi->nama_dokter}}
+        </td>
+        <td>
+            {{$ruang_operasi->nama_pasien}}
+        </td>
+        <td>
+            {{$ruang_operasi->nama_alat}}
         </td>
 
         <td>

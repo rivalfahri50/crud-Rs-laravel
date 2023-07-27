@@ -27,18 +27,28 @@ class RuangOperasiController extends Controller
     public function store(Request $request)
     {
        $this->validate($request , [
-        'no_ruang'=>'required',
+        'no_ruang'=>'required|unique:ruang_operasis',
         'status'=>'required',
+        'nama_dokter'=>'required',
+        'nama_pasien'=>'required',
+        'nama_alat'=>'required',
 
 
 
        ],[
+        'no_ruang.unique'=>'no sudah terpakai',
         'no_ruang.required'=>'no harus di isi',
         'status.required'=>'status harus dipilih',
+        'nama_dokter.required'=>'nama dokter harus dipilih',
+        'nama_pasien.required'=>'nama pasien harus dipilih',
+        'nama_alat.required'=>'nama alat harus dipilih',
         ]);
        RuangOperasi::create([
         'no_ruang'=>$request->no_ruang,
         'status'=>$request->status,
+        'nama_dokter'=>$request->nama_dokter,
+        'nama_pasien'=>$request->nama_pasien,
+        'nama_alat'=>$request->nama_alat,
         ]);
 
 
@@ -55,10 +65,23 @@ class RuangOperasiController extends Controller
         $this->validate($request,[
           'no_ruang'=>'required',
           'status'=>'required',
-        ]);
+          'nama_dokter'=>'required',
+          'nama_pasien'=>'required',
+          'nama_alat'=>'required',
+        ],[
+     
+            'no_ruang.required'=>'no harus di isi',
+            'status.required'=>'status harus dipilih',
+            'nama_dokter.required'=>'nama dokter harus dipilih',
+            'nama_pasien.required'=>'nama pasien harus dipilih',
+            'nama_alat.required'=>'nama alat harus dipilih',
+            ]);
             $ruang_operasi->update([
                'no_ruang'=>$request->no_ruang,
                'status'=>$request->status,
+               'nama_dokter'=>$request->nama_dokter,
+               'nama_pasien'=>$request->nama_pasien,
+               'nama_alat'=>$request->nama_alat,
             ]);
         return redirect()->route('ruang_operasi.index')->with('update' ,'Data berhasil Di ubah!');
     }

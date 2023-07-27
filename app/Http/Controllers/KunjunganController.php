@@ -30,7 +30,7 @@ class KunjunganController extends Controller
         'nama_pengunjung'=>'required',
         'nama_pasien'=>'required',
         'tanggal'=>'required|date_format:Y-m-d',
-        'ruang'=>'required',
+        'ruang'=>'required|unique:kunjungans',
        ]);
        $tanggal_formatted = date('d-m-Y', strtotime($request->tanggal));
        Kunjungan::create([
@@ -40,6 +40,7 @@ class KunjunganController extends Controller
     'ruang'=>$request->ruang,
 
        ],[
+        'ruang.unique'=>'ruang sedang di pakai',
         'nama_pengunjung.required'=>'Nama harus di isi',
         'nama_pasien.required'=>'Nama harus di isi',
         'tanggal.required'=>'tanggal harus dipilih',
@@ -50,7 +51,7 @@ class KunjunganController extends Controller
 
        return redirect()->route('kunjungan.index')->with('success','Data Berhasil Terkirim');
     }
-    
+
     public function edit(Kunjungan $kunjungan)
     {
         return view('kunjungan.edit', compact('kunjungan'));
@@ -61,13 +62,14 @@ class KunjunganController extends Controller
         'nama_pengunjung'=>'required',
         'nama_pasien'=>'required',
         'tanggal'=>'required|date_format:Y-m-d',
-        'ruang'=>'required',
+        'ruang'=>'required|unique:kunjungans',
         ],[
+            'ruang.unique'=>'ruang sedang di pakai',
             'nama_pengunjung.required'=>'Nama harus di isi',
             'nama_pasien.required'=>'Nama harus di isi',
             'tanggal.date_formatted'=>'tanggal harus dipilih',
             'ruang.required'=>'ruang harus diisi',
-     
+
         ]);
         $tanggal_formatted = date('d-m-Y', strtotime($request->tanggal));
         $kunjungan->update([
@@ -75,7 +77,7 @@ class KunjunganController extends Controller
                 'nama_pasien'=>$request->nama_pasien,
                 'tanggal'=>$tanggal_formatted,
                 'ruang'=>$request->ruang,
-        
+
             ]);
 
         return redirect()->route('kunjungan.index')->with('update' ,'Data berhasil Di ubah!');
