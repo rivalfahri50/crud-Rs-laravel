@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\no_antrian;
 use App\Http\Requests\Storeno_antrianRequest;
 use App\Http\Requests\Updateno_antrianRequest;
@@ -61,6 +61,7 @@ class NoAntrianController extends Controller
             'tgl_berobat'=>$tgl_berobat_formatted,
 
            ]);
+           Alert::success('Berhasil', 'berhasil menambah data!');
            return redirect()->route('no_antrian.index')->with('success','Data Berhasil Terkirim');
     }
 
@@ -111,7 +112,8 @@ class NoAntrianController extends Controller
                 'nama'=>$request->nama,
                 'tgl_berobat'=>$tgl_berobat_formatted,
             ]);
-        return redirect()->route('no_antrian.index')->with('update' ,'Data berhasil Di ubah!');
+            Alert::success('Berhasil', 'berhasil merubah data!');
+        return redirect()->route('no_antrian.index');
     }
 
     /**

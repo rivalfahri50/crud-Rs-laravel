@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\Perawat;
 use App\Http\Requests\StorePerawatRequest;
 use App\Http\Requests\UpdatePerawatRequest;
@@ -61,7 +61,7 @@ class PerawatController extends Controller
 
        ]);
 
-
+       Alert::success('Berhasil', 'berhasil menambah data!');
        return redirect()->route('perawat.index')->with('success','Data Berhasil Terkirim');
     }
 
@@ -107,7 +107,8 @@ class PerawatController extends Controller
                 'jenis_kelamin'=>$request->jenis_kelamin,
                 'tgl_lahir'=>$tgl_lahir_formatted,
             ]);
-        return redirect()->route('perawat.index')->with('update' ,'Data berhasil Di ubah!');
+            Alert::success('Berhasil', 'berhasil merubah data!');
+        return redirect()->route('perawat.index');
     }
 
     /**

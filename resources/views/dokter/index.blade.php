@@ -21,12 +21,15 @@
     <title>Dokter</title>
 </head>
 <body style="background-color: #C0C0C0;">
-    @if(Session::get('success'))
-        <script>alert("Berhasil menambah data!   ")</script>
-    @endif
-    @if(Session::get('update'))
-    <script>alert("Berhasil merubah data!  ")</script>
-@endif
+    return back()->withErrors(['doktererror' => 'Data ini masih digunakan']);
+    @error('doktererror')
+        <script>
+            swal("Data Berhasil Di hapus")
+        </script>
+    @enderror
+    @error('doktererror')
+        {{ $message }}
+    @enderror
 <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
     <div class="container">
         <a class="navbar-brand" href="#page-top"></a>
@@ -117,6 +120,17 @@
             </form>
         </center>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        @error('doktererror')
+        <script>
+            swal('Data masih digunakan')
+        </script>
+
+        @enderror
+        @if (Session::get('successhapus'))
+        <script>
+            swal('Data Berhasil di hapus')
+        </script>
+        @endif
         <script>
             function showAlert(event, id) {
                 event.preventDefault(); // menghentikan proses submit form
@@ -131,7 +145,7 @@
                 .then((willDelete) => {
                     if (willDelete) {
                         document.getElementById("delete-form-"+id).submit(); // submit form jika user mengklik tombol "Ya"
-                        swal("Data Berhasil Di hapus")
+                        
 
                 } else {
                     swal("Data doker tidak dihapus.");
@@ -146,5 +160,6 @@
            </table>
     {{ $dokters->links() }}
             </div>
+            @include('sweetalert::alert')
         </body>
         </html>

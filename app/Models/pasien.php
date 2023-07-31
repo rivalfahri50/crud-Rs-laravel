@@ -11,15 +11,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class pasien extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'nama',
-        'antrian_id',
-        'keluhan',
+    protected $guarded = [
+        'id',
+
     ];
     public function antrian(){
         return $this->belongsTo(no_antrian::class, 'antrian_id');
     }
-    public function ruang(){
-        return $this->hasMany(RuangOperasi::class, 'nama');
+    public function pasien(){
+        return $this->hasMany(RuangOperasi::class, 'pasien_id');
     }
 }

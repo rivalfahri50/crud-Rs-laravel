@@ -35,7 +35,7 @@
 
         <div class="form-group">
             <label class="form-label fw-bold">Jumlah Alat</label>
-            <input type="text" class="form-control @error('jumlah_alat') is-invalid @enderror" name="jumlah_alat" value="{{ old('jumlah_alat') }}"
+            <input type="number" class="form-control @error('jumlah_alat') is-invalid @enderror" name="jumlah_alat" value="{{ old('jumlah_alat') }}"
             placeholder="Masukkan jumlah_alat">
             <!-- error message untuk title -->
             @error('jumlah_alat')

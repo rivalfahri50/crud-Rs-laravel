@@ -45,42 +45,47 @@
     </div>
     <div class="form-group">
         <label class="font-weight-bold">Nama Dokter</label>
-        <input type="text" class="form-control @error('nama_dokter') is-invalid @enderror" name="nama_dokter" value="{{ old('nama_dokter') }}" placeholder="Masukkan nama_dokter">
+        <select name="dokter_id" id="" class="form-control">
+        @foreach ($dokters as $nama)
+            <option value="{{ $nama->id}}">{{ $nama->nama}}</option>
 
-        <!-- error message untuk title -->
-        @error('nama_dokter')
+        @endforeach
+    </select>
+        @error('dokter_id')
             <div class="alert alert-danger mt-2">
                 {{ $message }}
             </div>
         @enderror
-    </div>
-    <div class="form-group">
-        <label class="font-weight-bold">Nama Pasien</label>
-        <input type="text" class="form-control @error('nama_pasien') is-invalid @enderror" name="nama_pasien" value="{{ old('nama_pasien') }}" placeholder="Masukkan nama_pasien">
+        <div class="form-group">
+            <label class="font-weight-bold">Nama Pasien</label>
+            <select name="pasien_id" id="" class="form-control">
+            @foreach ($pasiens as $nama)
+                <option value="{{ $nama->id}}">{{ $nama->nama}}</option>
 
-        <!-- error message untuk title -->
-        @error('nama_pasien')
-            <div class="alert alert-danger mt-2">
-                {{ $message }}
-            </div>
-        @enderror
-    </div>
-    <div class="form-group">
-        <label class="font-weight-bold">Nama Alat</label>
-        <input type="text" class="form-control @error('nama_alat') is-invalid @enderror" name="nama_alat" value="{{ old('nama_alat') }}" placeholder="Masukkan nama_alat">
+            @endforeach
+        </select>
+            @error('pasien_id')
+                <div class="alert alert-danger mt-2">
+                    {{ $message }}
+                </div>
+            @enderror
+            <div class="form-group">
+                <label class="font-weight-bold">Nama Alat</label>
+                <select name="alat_id" id="" class="form-control">
+                @foreach ($alat_kesehatans as $nama_alat)
+                    <option value="{{ $nama_alat->id}}">{{ $nama_alat->nama_alat}}</option>
 
-        <!-- error message untuk title -->
-        @error('nama_alat')
-            <div class="alert alert-danger mt-2">
-                {{ $message }}
-            </div>
-        @enderror
-    </div>
+                @endforeach
+            </select>
+                @error('alat_id')
+                    <div class="alert alert-danger mt-2">
+                        {{ $message }}
+                    </div>
+                @enderror
 
 
 
-
-
+<br>
     <button type="submit" class="btn btn-md btn-primary">TAMBAH</button>
     <a class="btn btn-md btn-danger"href="{{ route('ruang_operasi.index') }}">KEMBALI</a>
 

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 
@@ -54,7 +54,7 @@ class PembayaranController extends Controller
 
        ]);
 
-
+       Alert::success('Berhasil', 'berhasil menambah data!');
        return redirect()->route('pembayaran.index')->with('success','Data Berhasil Terkirim');
     }
     public function edit(Pembayaran $pembayaran)
@@ -84,7 +84,8 @@ class PembayaranController extends Controller
                 'jumlah_obat'=>$request->jumlah_obat,
                 'ruang'=>$request->ruang,
             ]);
-        return redirect()->route('pembayaran.index')->with('update' ,'Data berhasil Di ubah!');
+            Alert::success('Berhasil', 'berhasil merubah data!');
+        return redirect()->route('pembayaran.index');
     }
 
     public function destroy(Pembayaran $pembayaran)

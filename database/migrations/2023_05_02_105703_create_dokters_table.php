@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('image')->nulllable;
             $table->string('jenis_kelamin');
-            $table->string('tgl_lahir');
+            $table->date('tgl_lahir');
             $table->timestamps();
         });
     }

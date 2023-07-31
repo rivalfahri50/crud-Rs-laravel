@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('nama_pengunjung');
             $table->string('nama_pasien');
-            $table->string('tanggal');
-            $table->string('ruang');
+            $table->date('tanggal');
+            $table->integer('ruang');
             $table->timestamps();
         });
     }

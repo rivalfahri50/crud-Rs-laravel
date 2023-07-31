@@ -27,12 +27,6 @@
         swal("Data Berhasil Di hapus")
     </script>
 @enderror
-    @if(Session::get('success'))
-    <script>alert("Berhasil menambah data!   ")</script>
-@endif
-@if(Session::get('update'))
-<script>alert("Berhasil merubah data!  ")</script>
-@endif
 @error('antrianerror')
     {{ $message }}
 @enderror
@@ -158,5 +152,6 @@
            </table>
            {{ $no_antrians->links() }}
         </div>
+        @include('sweetalert::alert')
         </body>
         </html>

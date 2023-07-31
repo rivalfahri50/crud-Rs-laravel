@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
 use Hash;
 use Session;
@@ -36,7 +37,7 @@ class CustomAuthController extends Controller
             return redirect()->intended('dashboard')
                         ->with('successlgn', 'Signed in!');
         }
-
+        Alert::success('Berhasil', 'berhasil Login!');
         return redirect('/login')->with('message', 'email / password Salah!!!')->withInput();
     }
 
@@ -63,8 +64,8 @@ class CustomAuthController extends Controller
 
         $data = $request->all();
         $check = $this->create($data);
-
-        return redirect("login")->with('success', 'berhasil registrasi');
+        Alert::success('Berhasil', 'berhasil registrasi!');
+        return redirect("login");
         }
     public function create(array $data)
     {
@@ -86,7 +87,7 @@ class CustomAuthController extends Controller
     public function signOut() {
         Session::flush();
         Auth::logout();
-
+        Alert::success('Berhasil', 'berhasil Logout!');
         return redirect('/login')->with('logout','Anda telah logout');
     }
 

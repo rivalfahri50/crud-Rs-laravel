@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\obat;
 use App\Http\Requests\StoreobatRequest;
 use App\Http\Requests\UpdateobatRequest;
@@ -59,6 +59,7 @@ class ObatController extends Controller
             'tgl_berobat.required'=>'Tanggall harus di isi',
             'biaya.required'=>'biaya harus di isi',
            ]);
+           Alert::success('Berhasil', 'berhasil menambah data!');
            return redirect()->route('obat.index')->with('success','Data Berhasil Terkirim');
     }
 
@@ -101,7 +102,8 @@ class ObatController extends Controller
                 'tgl_berobat'=>$tgl_berobat_formatted,
                 'biaya'=>$request->biaya,
             ]);
-        return redirect()->route('obat.index')->with('update', 'Data berhasil Di ubah!');
+            Alert::success('Berhasil', 'berhasil merubah data!');
+        return redirect()->route('obat.index');
     }
 
     /**

@@ -23,12 +23,7 @@
 <title>R.Operasi</title>
 </head>
 <body style="background-color: #C0C0C0;">
-    @if(Session::get('success'))
-    <script>alert("Berhasil menambah data!   ")</script>
-@endif
-@if(Session::get('update'))
-<script>alert("Berhasil merubah data!  ")</script>
-@endif
+
 <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
     <div class="container">
         <a class="navbar-brand" href="#page-top"></a>
@@ -108,13 +103,25 @@
             {{$ruang_operasi->status}}
         </td>
         <td>
-            {{$ruang_operasi->nama_dokter}}
+            @if ($ruang_operasi->dokter)
+            {{$ruang_operasi->dokter->nama}}
+        @else
+            dokter tidak tersedia
+        @endif
         </td>
         <td>
-            {{$ruang_operasi->nama_pasien}}
+            @if ($ruang_operasi->pasien)
+            {{$ruang_operasi->pasien->nama}}
+        @else
+            Pasien tidak tersedia
+        @endif
         </td>
         <td>
-            {{$ruang_operasi->nama_alat}}
+            @if ($ruang_operasi->alat)
+            {{$ruang_operasi->alat->nama_alat}}
+        @else
+            Nama alat tidak tersedia
+        @endif
         </td>
 
         <td>
@@ -158,5 +165,6 @@
        {{ $ruang_operasis->links() }}
     </div>
 </div>
+@include('sweetalert::alert')
     </body>
     </html>

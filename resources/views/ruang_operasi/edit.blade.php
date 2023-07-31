@@ -40,42 +40,48 @@
             </div>
             @enderror
             </div>
-            <div class="mb-3">
-                <label class="form-label fw-bold">Nama Dokter</label>
-                <input type="text" class="form-control @error('nama_dokter') is-invalid @enderror" name="nama_dokter" value="{{ old('nama_dokter', $ruang_operasi->nama_dokter) }}"
-                placeholder="Masukkan status">
-                <!-- error message untuk title -->
-                @error('nama_dokter')
-                <div class="alert alert-danger mt-2">
-                    {{ $message }}
-                </div>
-                @enderror
-                </div>
-                <div class="mb-3">
-                    <label class="form-label fw-bold">Nama Pasien</label>
-                    <input type="text" class="form-control @error('nama_pasien') is-invalid @enderror" name="nama_pasien" value="{{ old('nama_pasien', $ruang_operasi->nama_pasien) }}"
-                    placeholder="Masukkan status">
-                    <!-- error message untuk title -->
-                    @error('nama_pasien')
+            <div class="form-group">
+                <label class="font-weight-bold">Nama Dokter</label>
+                <select name="dokter_id" id="" class="form-control">
+                @foreach ($dokters as $nama)
+                    <option value="{{ $nama->id}}" {{ ($nama->id == $ruang_operasi->dokter_id) ? "selected" : "" }}>{{ $nama->nama}}</option>
+
+                @endforeach
+            </select>
+                @error('dokter_id')
                     <div class="alert alert-danger mt-2">
                         {{ $message }}
                     </div>
-                    @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">Nama Alat</label>
-                        <input type="text" class="form-control @error('nama_alat') is-invalid @enderror" name="nama_alat" value="{{ old('nama_alat', $ruang_operasi->nama_alat) }}"
-                        placeholder="Masukkan status">
-                        <!-- error message untuk title -->
-                        @error('nama_alat')
+                @enderror
+                <div class="form-group">
+                    <label class="font-weight-bold">Nama Pasien</label>
+                    <select name="pasien_id" id="" class="form-control">
+                    @foreach ($pasiens as $nama)
+                        <option value="{{ $nama->id}}" {{ ($nama->id == $ruang_operasi->pasien_id) ? "selected" : "" }}>{{ $nama->nama}}</option>
+
+                    @endforeach
+                </select>
+                    @error('pasien_id')
                         <div class="alert alert-danger mt-2">
                             {{ $message }}
                         </div>
+                    @enderror
+                    <div class="form-group">
+                        <label class="font-weight-bold">Nama Alat</label>
+                        <select name="alat_id" id="" class="form-control">
+                        @foreach ($alat_kesehatans as $nama_alat)
+                            <option value="{{ $nama_alat->id}}" {{ ($nama_alat->id == $ruang_operasi->nama_alat) ? "selected" : "" }}>{{ $nama_alat->nama_alat}}</option>
+
+                        @endforeach
+                    </select>
+                        @error('alat_id')
+                            <div class="alert alert-danger mt-2">
+                                {{ $message }}
+                            </div>
                         @enderror
-                        </div>
 
 
-
+           <br>
     <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
     <a href="{{ route('ruang_operasi.index') }}" class="btn btn-md btn-warning">KEMBALI</a>
     </form>

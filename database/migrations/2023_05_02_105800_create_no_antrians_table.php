@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('no_antrians', function (Blueprint $table) {
             $table->id();
-            $table->string('no_antrian');
+            $table->integer('no_antrian');
             $table->string('nama');
-            $table->string('tgl_berobat');
+            $table->date('tgl_berobat');
             $table->timestamps();
         });
     }

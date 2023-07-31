@@ -10,14 +10,11 @@ use Illuminate\Support\Carbon;
 class dokter extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'nama',
-        'image',
-        'jenis_kelamin',
-        'tgl_lahir',
+    protected $guarded = [
+        'id'
     ];
-    public function ruang(){
-        return $this->hasMany(RuangOperasi::class, 'nama');
+    public function dokter(){
+        return $this->hasMany(RuangOperasi::class, 'dokter_id');
     }
 
 }

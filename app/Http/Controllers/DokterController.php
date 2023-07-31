@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\dokter;
 use App\Http\Requests\StoredokterRequest;
 use App\Http\Requests\UpdatedokterRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\QueryException;
 class DokterController extends Controller
 {
     /**
@@ -65,6 +66,7 @@ class DokterController extends Controller
             'tgl_lahir'=>$tgl_lahir_formatted,
 
            ]);
+           Alert::success('Berhasil', 'berhasil menambah data!');
            return redirect()->route('dokter.index')->with('success','Data Berhasil Terkirim');
     }
 
@@ -127,7 +129,8 @@ class DokterController extends Controller
             'tgl_lahir'=>$tgl_lahir_formatted,
         ]);
     }
-    return redirect()->route('dokter.index')->with('update','Data berhasil Di ubah!');
+    Alert::success('Berhasil', 'berhasil merubah data!');
+    return redirect()->route('dokter.index');
 }
 
 
@@ -140,7 +143,12 @@ class DokterController extends Controller
     public function destroy(dokter $dokter)
     {
     unlink(public_path('storage/dkt/'.$dokter->image));
-    $dokter->delete();
-    return redirect()->route('dokter.index');
+    try {
+        $dokter->delete();
+        return  redirect()->route('dokter.index')->with('successhapus','berhasil menghapus');
+    }
+    catch (QueryException $e) {
+        return back()->withErrors(['doktererror' => 'Data ini masih digunakan']);
+    }
     }
 }

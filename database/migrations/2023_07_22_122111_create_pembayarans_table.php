@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('nama_pasien');
             $table->string('nama_dokter');
             $table->string('obat');
-            $table->string('jumlah_obat');
-            $table->string('ruang');
+            $table->integer('jumlah_obat');
+            $table->integer('ruang');
             $table->timestamps();
         });
     }

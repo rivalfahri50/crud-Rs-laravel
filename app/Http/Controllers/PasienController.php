@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\pasien;
 use App\Models\no_antrian;
 use App\Http\Requests\StorepasienRequest;
 use App\Http\Requests\UpdatepasienRequest;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 class PasienController extends Controller
 {
     /**
@@ -61,6 +62,7 @@ class PasienController extends Controller
             'keluhan'=>$request->keluhan,
 
            ]);
+           Alert::success('Berhasil', 'berhasil menambah data!');
            return redirect()->route('pasien.index')->with('success','Data Berhasil Terkirim');
     }
 
@@ -112,7 +114,8 @@ class PasienController extends Controller
                 'antrian_id'=>$request->antrian_id,
                 'keluhan'=>$request->keluhan,
             ]);
-        return redirect()->route('pasien.index')->with('update','Data berhasil Di ubah!');
+            Alert::success('Berhasil', 'berhasil merubah data!');
+        return redirect()->route('pasien.index');
     }
 
     /**
@@ -123,7 +126,12 @@ class PasienController extends Controller
      */
     public function destroy(pasien $pasien)
     {
-        $pasien->delete();
-        return  redirect()->route('pasien.index');
+        try {
+            $pasien->delete();
+            return  redirect()->route('pasien.index')->with('successhapus','berhasil menghapus');
+        }
+        catch (QueryException $e) {
+            return back()->withErrors(['pasienerror' => 'Data ini masih digunakan']);
+        }
     }
 }

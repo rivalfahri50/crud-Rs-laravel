@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('alat__kesehatans', function (Blueprint $table) {
             $table->id();
             $table->string('nama_alat');
-            $table->string('jumlah_alat');
+            $table->integer('jumlah_alat');
             $table->timestamps();
         });
     }

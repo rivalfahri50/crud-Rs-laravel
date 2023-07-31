@@ -22,12 +22,15 @@
     <title>Alat Kesehatan</title>
 </head>
 <body style="background-color: #C0C0C0;">
-    @if(Session::get('success'))
-    <script>alert("Berhasil menambah data!   ")</script>
-@endif
-@if(Session::get('update'))
-<script>alert("Berhasil merubah data!  ")</script>
-@endif
+    return back()->withErrors(['alaterror' => 'Data ini masih digunakan']);
+    @error('alaterror')
+        <script>
+            swal("Data Berhasil Di hapus")
+        </script>
+    @enderror
+    @error('alaterror')
+        {{ $message }}
+    @enderror
 <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
     <div class="container">
         <a class="navbar-brand" href="#page-top"></a>
@@ -88,26 +91,37 @@
             Aksi
         </td>
     </tr>
-    @forelse ($alat__kesehatans as $key => $alat_kesehatan )
+    @forelse ($alat__kesehatans as $key => $alat__kesehatan )
     <tr>
         <td>{{$alat__kesehatans->firstItem()+  $key  }}</td>
         <td>
-           {{$alat_kesehatan->nama_alat}}
+           {{$alat__kesehatan->nama_alat}}
         </td>
         <td>
-            {{$alat_kesehatan->jumlah_alat}}
+            {{$alat__kesehatan->jumlah_alat}}
         </td>
         <td>
 
 
-          <form id="delete-form-{{ $alat_kesehatan->id }}" action="{{route('alat_kesehatan.destroy', $alat_kesehatan->id) }}" method="POST">
+          <form id="delete-form-{{ $alat__kesehatan->id }}" action="{{route('alat_kesehatan.destroy', $alat__kesehatan->id) }}" method="POST">
             @csrf
             @method('DELETE')
-            <a href="{{ route('alat_kesehatan.edit',$alat_kesehatan->id) }}" class="btn btn-primary">Edit</a>
-            <button type="submit" class="btn btn-danger" onclick="showAlert(event, {{ $alat_kesehatan->id }})">Delete</button>
+            <a href="{{ route('alat_kesehatan.edit',$alat__kesehatan->id) }}" class="btn btn-primary">Edit</a>
+            <button type="submit" class="btn btn-danger" onclick="showAlert(event, {{ $alat__kesehatan->id }})">Delete</button>
         </form>
     </center>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    @error('alaterror')
+    <script>
+        swal('Data masih digunakan')
+    </script>
+
+    @enderror
+    @if (Session::get('successhapus'))
+    <script>
+        swal('Data Berhasil di hapus')
+    </script>
+    @endif
     <script>
         function showAlert(event, id) {
             event.preventDefault(); // menghentikan proses submit form
@@ -122,7 +136,7 @@
             .then((willDelete) => {
                 if (willDelete) {
                     document.getElementById("delete-form-"+id).submit(); // submit form jika user mengklik tombol "Ya"
-                    swal("Data Berhasil Di hapus")
+                    
                 } else {
                     swal("Data alat kesehatan tidak dihapus.");
                 }
@@ -138,5 +152,6 @@
        {{ $alat__kesehatans->links() }}
     </div>
 </div>
+@include('sweetalert::alert')
     </body>
     </html>

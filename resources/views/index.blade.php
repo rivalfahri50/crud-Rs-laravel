@@ -78,11 +78,6 @@
         <!-- Bootstrap core JS-->
         <script src="{{ asset ('https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js')}}"></script>
 
-        @if (Session::get('successlgn'))
-            <script>
-                alert('Berhasil Login')
-            </script>
-        @endif
         <!-- Core theme JS-->
         <script src="{{ asset ('js/scripts.js')}}"></script>
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
@@ -90,6 +85,7 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="{{ asset ('https://cdn.startbootstrap.com/sb-forms-latest.js')}}"></script>
+        @include('sweetalert::alert')
     </body>
 
 </html>

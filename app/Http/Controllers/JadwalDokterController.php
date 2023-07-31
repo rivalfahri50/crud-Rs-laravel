@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\Jadwal_Dokter;
 use Illuminate\Http\Request;
 
@@ -49,7 +49,7 @@ class JadwalDokterController extends Controller
 
        ]);
 
-
+       Alert::success('Berhasil', 'berhasil menambah data!');
        return redirect()->route('jadwal_dokter.index')->with('success','Data Berhasil Terkirim');
     }
 
@@ -79,8 +79,8 @@ class JadwalDokterController extends Controller
                 'nama_pasien'=>$request->nama_pasien,
 
             ]);
-
-        return redirect()->route('jadwal_dokter.index')->with('update' ,'Data berhasil Di ubah!');
+            Alert::success('Berhasil', 'berhasil merubah data!');
+        return redirect()->route('jadwal_dokter.index');
     }
 
     public function destroy(Jadwal_Dokter $jadwal_dokter)

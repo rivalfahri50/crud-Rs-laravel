@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
 use App\Models\Satpam;
 
@@ -17,11 +18,13 @@ class SatpamController extends Controller
             $satpams = Satpam::paginate(4);
            }
             return view('satpam.index' , compact('satpams'));
+            
     }
 
     public function create()
     {
         return view ('satpam.create');
+        
     }
 
     public function store(Request $request)
@@ -46,9 +49,9 @@ class SatpamController extends Controller
         'umur' => $request->umur,
     ]);
 
-
+    Alert::success('Berhasil', 'berhasil menambah data!');
         
-       return redirect()->route('satpam.index')->with('success', 'Task Created Successfully!');
+       return redirect()->route('satpam.index');
     }
 
     public function edit(Satpam $satpam)
@@ -60,13 +63,13 @@ class SatpamController extends Controller
         $this->validate($request, [
             'nama' => 'required',
             'alamat' => 'required',
-            'no_hp' => 'required|unique:satpams|min:12',
+            'no_hp' => 'required|min:12',
             'umur' => 'required',
         ], [
             'nama.required' => 'Nama harus diisi.',
             'alamat.required' => 'Alamat harus diisi.',
             'no_hp.required' => 'No HP harus diisi.',
-            'no_hp.unique' => 'No HP sudah ada dalam database.',
+
             'no_hp.min' => 'No HP harus memiliki panjang minimal 12 karakter.',
             'umur.required' => 'Umur harus diisi.',
         ]);
@@ -77,6 +80,7 @@ class SatpamController extends Controller
             'no_hp' => $request->no_hp,
             'umur' => $request->umur,
         ]);
+        Alert::success('Berhasil', 'berhasil merubah data!');
 
         return redirect()->route('satpam.index')->with('update' ,'Data berhasil Di ubah!');
     }
@@ -84,6 +88,8 @@ class SatpamController extends Controller
     public function destroy(Satpam $satpam)
     {
         $satpam->delete();
+    
+
         return  redirect()->route('satpam.index');
     }
 

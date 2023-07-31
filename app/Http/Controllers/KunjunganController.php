@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\Kunjungan;
 use Illuminate\Http\Request;
 
@@ -48,8 +48,8 @@ class KunjunganController extends Controller
 
        ]);
 
-
-       return redirect()->route('kunjungan.index')->with('success','Data Berhasil Terkirim');
+       Alert::success('Berhasil', 'berhasil menambah data!');
+       return redirect()->route('kunjungan.index');
     }
 
     public function edit(Kunjungan $kunjungan)
@@ -79,8 +79,8 @@ class KunjunganController extends Controller
                 'ruang'=>$request->ruang,
 
             ]);
-
-        return redirect()->route('kunjungan.index')->with('update' ,'Data berhasil Di ubah!');
+            Alert::success('Berhasil', 'berhasil merubah data!');
+        return redirect()->route('kunjungan.index');
     }
 
     public function destroy(Kunjungan $kunjungan)

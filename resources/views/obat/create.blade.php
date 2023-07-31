@@ -45,7 +45,7 @@
     </div>
     <div class="form-group">
         <label class="font-weight-bold">Biaya</label>
-        <input type="number" class="form-control @error('biaya') is-invalid @enderror" name="biaya" value="{{ old('biaya')}}" value="Rp">
+        <input type="number" class="form-control @error('biaya') is-invalid @enderror" name="biaya" value="{{ old('biaya')}}" value="Rp.">
 
         <!-- error message untuk title -->
         @error('biaya')

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\Alat_Kesehatan;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 class AlatKesehatanController extends Controller
 {
@@ -40,7 +42,7 @@ class AlatKesehatanController extends Controller
         'jumlah_alat'=>$request->jumlah_alat,
         ]);
 
-
+        Alert::success('Berhasil', 'berhasil menambah data!');
        return redirect()->route('alat_kesehatan.index')->with('success','Data Berhasil Terkirim');
     }
 
@@ -57,15 +59,21 @@ class AlatKesehatanController extends Controller
             $alat_kesehatan->update([
                 'nama_alat'=>$request->nama_alat,
         'jumlah_alat'=>$request->jumlah_alat,
-      
+
             ]);
-        return redirect()->route('alat_kesehatan.index')->with('update' ,'Data berhasil Di ubah!');
+            Alert::success('Berhasil', 'berhasil menambah data!');
+        return redirect()->route('alat_kesehatan.index');
     }
 
     public function destroy(Alat_Kesehatan $alat_kesehatan)
     {
-        $alat_kesehatan->delete();
-        return  redirect()->route('alat_kesehatan.index');
+        try {
+            $alat_kesehatan->delete();
+            return  redirect()->route('alat_kesehatan.index')->with('successhapus','berhasil menghapus');
+        }
+        catch (QueryException $e) {
+            return back()->withErrors(['alaterror' => 'Data ini masih digunakan']);
+        }
     }
 
 }

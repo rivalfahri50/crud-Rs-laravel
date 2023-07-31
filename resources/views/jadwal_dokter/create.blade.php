@@ -34,7 +34,7 @@
         </div>
 
         <div class="form-group">
-            <label class="font-weight-bold">Tanggal </label>
+            <label class="form-label fw-bold">Tanggal </label>
             <input type="date" class="form-control @error('tanggal') is-invalid @enderror" name="tanggal" value="{{ date('d-m-Y') }}"  >
 
             <!-- error message untuk title -->
