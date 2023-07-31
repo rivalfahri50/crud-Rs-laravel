@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('ruang_operasis', function (Blueprint $table) {
             $table->id();
-            $table->string('no_ruang');
+            $table->integer('no_ruang');
             $table->string('status');
-            $table->foreignId('nama_dokter')->constrained( 'dokters','nama')->onDelete('restrict')->onUpdate('restrict');
-            $table->foreignId('nama_pasien')->constrained( 'pasiens','nama')->onDelete('restrict')->onUpdate('restrict');
-            $table->foreignId('nama_alat')->constrained( 'alat__kesehatans','nama_alat')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreignId('dokter_id')->constrained('dokters', 'id')->onDelete('restrict');
+            $table->foreignId('pasien_id')->constrained('pasiens', 'id')->onDelete('restrict');
+            $table->foreignId('alat_id')->constrained('alat__kesehatans', 'id')->onDelete('restrict');
             $table->timestamps();
         });
     }

@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alat_Kesehatan;
+use App\Models\dokter;
+use App\Models\pasien;
+use RealRashid\SweetAlert\Facades\Alert;
+
 use App\Models\RuangOperasi;
 use Illuminate\Http\Request;
+use PHPUnit\TextUI\XmlConfiguration\Group;
 
 class RuangOperasiController extends Controller
 {
@@ -21,7 +27,12 @@ class RuangOperasiController extends Controller
 
     public function create()
     {
-        return view ('ruang_operasi.create');
+
+        $dokters = dokter::all();
+        $pasiens = pasien::all();
+        $alat_kesehatans = Alat_Kesehatan::all();
+
+        return view ('ruang_operasi.create',compact('dokters','pasiens','alat_kesehatans'));
     }
 
     public function store(Request $request)
@@ -29,9 +40,9 @@ class RuangOperasiController extends Controller
        $this->validate($request , [
         'no_ruang'=>'required|unique:ruang_operasis',
         'status'=>'required',
-        'nama_dokter'=>'required',
-        'nama_pasien'=>'required',
-        'nama_alat'=>'required',
+        'dokter_id'=>'required',
+        'pasien_id'=>'required',
+        'alat_id'=>'required',
 
 
 
@@ -39,25 +50,28 @@ class RuangOperasiController extends Controller
         'no_ruang.unique'=>'no sudah terpakai',
         'no_ruang.required'=>'no harus di isi',
         'status.required'=>'status harus dipilih',
-        'nama_dokter.required'=>'nama dokter harus dipilih',
-        'nama_pasien.required'=>'nama pasien harus dipilih',
-        'nama_alat.required'=>'nama alat harus dipilih',
+        'dokter_id.required'=>'nama dokter harus dipilih',
+        'pasien_id.required'=>'nama pasien harus dipilih',
+        'alat_id.required'=>'nama alat harus dipilih',
         ]);
        RuangOperasi::create([
         'no_ruang'=>$request->no_ruang,
         'status'=>$request->status,
-        'nama_dokter'=>$request->nama_dokter,
-        'nama_pasien'=>$request->nama_pasien,
-        'nama_alat'=>$request->nama_alat,
+        'dokter_id'=>$request->dokter_id,
+        'pasien_id'=>$request->pasien_id,
+        'alat_id'=>$request->alat_id,
         ]);
 
-
-       return redirect()->route('ruang_operasi.index')->with('success','Data Berhasil Terkirim');
+        Alert::success('Berhasil', 'berhasil menambah data!');
+       return redirect()->route('ruang_operasi.index');
     }
 
     public function edit(RuangOperasi $ruang_operasi)
     {
-        return view('ruang_operasi.edit', compact('ruang_operasi'));
+        $alat_kesehatans = Alat_Kesehatan::all();
+        $pasiens = pasien::all();
+        $dokters = dokter::all();
+        return view('ruang_operasi.edit', compact('ruang_operasi','dokters','pasiens','alat_kesehatans'));
     }
     public function update(Request $request, RuangOperasi $ruang_operasi)
     {
@@ -65,25 +79,26 @@ class RuangOperasiController extends Controller
         $this->validate($request,[
           'no_ruang'=>'required',
           'status'=>'required',
-          'nama_dokter'=>'required',
-          'nama_pasien'=>'required',
-          'nama_alat'=>'required',
+          'dokter_id'=>'required',
+          'pasien_id'=>'required',
+          'alat_id'=>'required',
         ],[
-     
+
             'no_ruang.required'=>'no harus di isi',
             'status.required'=>'status harus dipilih',
-            'nama_dokter.required'=>'nama dokter harus dipilih',
-            'nama_pasien.required'=>'nama pasien harus dipilih',
-            'nama_alat.required'=>'nama alat harus dipilih',
+            'dokter_id.required'=>'nama dokter harus dipilih',
+            'pasien_id.required'=>'nama pasien harus dipilih',
+            'alat_id.required'=>'nama alat harus dipilih',
             ]);
             $ruang_operasi->update([
                'no_ruang'=>$request->no_ruang,
                'status'=>$request->status,
-               'nama_dokter'=>$request->nama_dokter,
-               'nama_pasien'=>$request->nama_pasien,
-               'nama_alat'=>$request->nama_alat,
+               'dokter_id'=>$request->dokter_id,
+               'pasien_id'=>$request->pasien_id,
+               'alat_id'=>$request->alat_id,
             ]);
-        return redirect()->route('ruang_operasi.index')->with('update' ,'Data berhasil Di ubah!');
+            Alert::success('Berhasil', 'berhasil mengubah data!');
+        return redirect()->route('ruang_operasi.index');
     }
 
     public function destroy(RuangOperasi $ruang_operasi)

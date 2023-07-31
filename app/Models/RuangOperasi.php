@@ -10,15 +10,17 @@ class RuangOperasi extends Model
 {
     use HasFactory;
 
-    protected $guarded=[];
+    protected $guarded=[
+        'id'
+    ];
 
     public function dokter(){
-        return $this->belongsTo(dokter::class,'nama_dokter');
+        return $this->belongsTo(dokter::class,'dokter_id');
 }
 public function pasien(){
-    return $this->belongsTo(pasien::class,'nama_pasien');
+    return $this->belongsTo(pasien::class,'pasien_id');
 }
 public function alat(){
-    return $this->belongsTo(Alat_Kesehatan::class,'nama_alat');
+    return $this->belongsTo(Alat_Kesehatan::class,'alat_id');
 }
 }
