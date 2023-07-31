@@ -17,11 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('no_ruang');
             $table->string('status');
-            $table->string('nama_dokter');
-            $table->string('nama_pasien');
-            $table->string('nama_alat');
-
-
+            $table->foreignId('nama_dokter')->constrained( 'dokters','nama')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreignId('nama_pasien')->constrained( 'pasiens','nama')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreignId('nama_alat')->constrained( 'alat__kesehatans','nama_alat')->onDelete('restrict')->onUpdate('restrict');
             $table->timestamps();
         });
     }
