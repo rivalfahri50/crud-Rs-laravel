@@ -31,7 +31,7 @@ class SatpamController extends Controller
     {$this->validate($request, [
         'nama' => 'required',
         'alamat' => 'required',
-        'no_hp' => 'required|unique:satpams',
+        'no_hp' => 'required|unique:satpams|min:12',
         'umur' => 'required',
     ],[
         'nama.required' => 'Nama harus diisi.',
