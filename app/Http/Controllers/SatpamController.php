@@ -18,20 +18,20 @@ class SatpamController extends Controller
             $satpams = Satpam::paginate(4);
            }
             return view('satpam.index' , compact('satpams'));
-            
+
     }
 
     public function create()
     {
         return view ('satpam.create');
-        
+
     }
 
     public function store(Request $request)
     {$this->validate($request, [
         'nama' => 'required',
         'alamat' => 'required',
-        'no_hp' => 'required|unique:satpams|min:12',
+        'no_hp' => 'required|unique:satpams',
         'umur' => 'required',
     ],[
         'nama.required' => 'Nama harus diisi.',
@@ -50,7 +50,7 @@ class SatpamController extends Controller
     ]);
 
     Alert::success('Berhasil', 'berhasil menambah data!');
-        
+
        return redirect()->route('satpam.index');
     }
 
@@ -88,7 +88,7 @@ class SatpamController extends Controller
     public function destroy(Satpam $satpam)
     {
         $satpam->delete();
-    
+
 
         return  redirect()->route('satpam.index');
     }
