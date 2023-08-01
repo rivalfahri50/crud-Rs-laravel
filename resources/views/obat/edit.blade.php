@@ -77,9 +77,9 @@
 
     <div class="mb-3">
         <label class="form-label fw-bold">Tanggal Berobat</label>
-        <input type="date" name="tgl_lahir" id="" class="form-control"
-            value="{{ date('Y-m-d', strtotime($obat->tgl_lahir)) }}">
-        @error('tgl_lahir')
+        <input type="date" name="tgl_berobat" id="" class="form-control"
+            value="{{ date('Y-m-d', strtotime($obat->tgl_berobat)) }}">
+        @error('tgl_berobat')
             <div class="alert alert-danger mt-2">
                 {{ $message }}
             </div>

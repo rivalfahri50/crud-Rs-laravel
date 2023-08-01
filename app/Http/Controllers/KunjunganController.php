@@ -71,7 +71,7 @@ class KunjunganController extends Controller
             'ruang.required'=>'ruang harus diisi',
 
         ]);
-        $tanggal_formatted = date('d-m-Y', strtotime($request->tanggal));
+        $tanggal_formatted = date('Y-m-d', strtotime($request->tanggal));
         $kunjungan->update([
                 'nama_pengunjung'=>$request->nama_pengunjung,
                 'nama_pasien'=>$request->nama_pasien,

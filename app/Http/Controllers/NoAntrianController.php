@@ -58,6 +58,7 @@ class NoAntrianController extends Controller
            no_antrian::create([
             'no_antrian'=>$request->no_antrian,
             'nama'=>$request->nama,
+            'tgl_berobat'=>$request->tgl_berobat,
             'tgl_berobat'=>$tgl_berobat_formatted,
 
            ]);
@@ -110,6 +111,7 @@ class NoAntrianController extends Controller
             $no_antrian->update([
                 'no_antrian'=>$request->no_antrian,
                 'nama'=>$request->nama,
+                'tgl_berobat'=>$request->tgl_berobat,
                 'tgl_berobat'=>$tgl_berobat_formatted,
             ]);
             Alert::success('Berhasil', 'berhasil merubah data!');

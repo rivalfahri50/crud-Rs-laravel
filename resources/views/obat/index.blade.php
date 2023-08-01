@@ -92,7 +92,7 @@
            {{$obat->keluhan}}
         </td>
         <td>
-            {{ \Carbon\Carbon::parse($obat->tgl_lahir)->format('d-m-Y') }}
+            {{ \Carbon\Carbon::parse($obat->tgl_berobat)->format('d-m-Y') }}
         </td>
         <td>
             Rp.{{$obat->biaya}}

@@ -107,7 +107,7 @@ class DokterController extends Controller
         'jenis_kelamin'=>'required',
         'tgl_lahir'=>'required|date_format:d-m-Y',
     ]);
-    $tgl_lahir_formatted = date('Y-d-m', strtotime($request->tgl_lahir));
+    $tgl_lahir_formatted = date('Y-m-d', strtotime($request->tgl_lahir));
     if($request->hasFile('image')){
         $image = $request->file('image');
         $image->storeAs('public/dkt', $image->hashName());
@@ -122,7 +122,7 @@ class DokterController extends Controller
 
         ]);
     } else {
-        $tgl_lahir_formatted = date('d-m-Y', strtotime($request->tgl_lahir));
+        $tgl_lahir_formatted = date('Y-m-d', strtotime($request->tgl_lahir));
         $image = $dokter->image;
 
         $dokter->update([

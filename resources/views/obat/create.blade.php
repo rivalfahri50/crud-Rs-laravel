@@ -78,10 +78,10 @@
     </div>
     <div class="form-group">
         <label class="font-weight-bold">Tanggal Berobat</label>
-        <input type="date" class="form-control @error('tgl_lahir') is-invalid @enderror" name="tgl_lahir" value="{{ date('d-m-Y') }}" >
+        <input type="date" class="form-control @error('tgl_berobat') is-invalid @enderror" name="tgl_berobat" value="{{ date('d-m-Y') }}" >
 
         <!-- error message untuk title -->
-        @error('tgl_lahir')
+        @error('tgl_berobat')
             <div class="alert alert-danger mt-2">
                 {{ $message }}
             </div>

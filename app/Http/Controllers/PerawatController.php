@@ -57,6 +57,7 @@ class PerawatController extends Controller
        Perawat::create([
         'nama'=>$request->nama,
         'jenis_kelamin'=>$request->jenis_kelamin,
+        'tgl_lahir'=>$request->tgl_lahir,
         'tgl_lahir'=>$tgl_lahir_formatted,
 
        ]);
@@ -105,6 +106,7 @@ class PerawatController extends Controller
             $perawat->update([
                 'nama'=>$request->nama,
                 'jenis_kelamin'=>$request->jenis_kelamin,
+                'tgl_lahir'=>$request->tgl_lahir,
                 'tgl_lahir'=>$tgl_lahir_formatted,
             ]);
             Alert::success('Berhasil', 'berhasil merubah data!');
