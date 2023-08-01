@@ -75,6 +75,7 @@ class KunjunganController extends Controller
         $kunjungan->update([
                 'nama_pengunjung'=>$request->nama_pengunjung,
                 'nama_pasien'=>$request->nama_pasien,
+                'tanggal'=>$request->tanggal,
                 'tanggal'=>$tanggal_formatted,
                 'ruang'=>$request->ruang,
 

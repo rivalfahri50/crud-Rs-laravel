@@ -16,16 +16,17 @@
     }
 </style>
 <div class="bg-image"
-     style="background-image: url('https://rumahsakit.usu.ac.id/wp-content/uploads/2022/10/medical.jpg');
-            height: 100vh">
+     style="background-image: url('https://res.cloudinary.com/dk0z4ums3/image/upload/v1608025776/attached_image/apakah-saya-hamil.jpg');
+     background-repeat: no-repeat; background-size: cover;">
 
 @extends('layout')
 @section('content')
 <main class="signup-form">
     <div class="cotainer">
         <div class="row justify-content-center">
-            <div class="col-md-7">
-                <div class="max">
+            <div class="col-md-9">
+                <div class="card">
+                <div class="card-body">
                 @if ($errors->any())
                 <div class="alert">
                     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
@@ -40,7 +41,7 @@
                     <div class="card-body">
                         <form action="{{ route('postsignup') }}" method="POST">
                             @csrf
-                            <div class="form-group mb-3"><b>Name
+                            <div class="form-group mb-3">Name
                                 <input type="text" placeholder="Name" id="name" class="form-control" name="name" value="{{ old('name') }}" autofocus>
                                 @if ($errors->has('name'))
                                 <span class="text-danger">{{ $errors->first('name') }}</span>

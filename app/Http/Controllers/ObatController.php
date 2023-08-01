@@ -48,11 +48,13 @@ class ObatController extends Controller
             'tgl_berobat'=>'required|date_format:Y-m-d',
             'biaya'=>'required',
            ]);
-           $tgl_berobat_formatted = date('d-m-Y', strtotime($request->tgl_berobat));
+           $tgl_berobat_formatted = date('Y-m-d', strtotime($request->tgl_berobat));
            obat::create([
             'keluhan'=>$request->keluhan,
+            'tgl_berobat'=>$request->tgl_berobat,
             'tgl_berobat'=>$tgl_berobat_formatted,
             'biaya'=>$request->biaya,
+
 
            ],[
             'keluhan.required'=>'keluhan harus di isi',
@@ -96,9 +98,10 @@ class ObatController extends Controller
             'tgl_berobat.date_format'=>'tanggal berobat harus diisi',
             'biaya.required'=>'biaya harus diisi',
         ]);
-        $tgl_berobat_formatted = date('d-m-Y', strtotime($request->tgl_berobat));
+        $tgl_berobat_formatted = date('Y-m-d', strtotime($request->tgl_berobat));
             $obat->update([
                 'keluhan'=>$request->keluhan,
+                'tgl_berobat'=>$request->tgl_berobat,
                 'tgl_berobat'=>$tgl_berobat_formatted,
                 'biaya'=>$request->biaya,
             ]);

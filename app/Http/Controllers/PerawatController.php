@@ -53,7 +53,7 @@ class PerawatController extends Controller
         'tgl_lahir.required'=>'tanggal lahir harus di isi',
 
        ]);
-       $tgl_lahir_formatted = date('d-m-Y', strtotime($request->tgl_lahir));
+       $tgl_lahir_formatted = date('Y-m-d', strtotime($request->tgl_lahir));
        Perawat::create([
         'nama'=>$request->nama,
         'jenis_kelamin'=>$request->jenis_kelamin,
@@ -101,7 +101,7 @@ class PerawatController extends Controller
             'jenis_kelamin'=>'required',
             'tgl_lahir'=>'required|date_format:Y-m-d',
         ]);
-        $tgl_lahir_formatted = date('d-m-Y', strtotime($request->tgl_lahir));
+        $tgl_lahir_formatted = date('Y-m-d', strtotime($request->tgl_lahir));
             $perawat->update([
                 'nama'=>$request->nama,
                 'jenis_kelamin'=>$request->jenis_kelamin,

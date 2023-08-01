@@ -33,9 +33,10 @@ class JadwalDokterController extends Controller
         'ruang'=>'required|unique:jadwal__dokters',
         'nama_pasien'=>'required',
        ]);
-       $tanggal_formatted = date('d-m-Y', strtotime($request->tanggal));
+       $tanggal_formatted = date('Y-m-d', strtotime($request->tanggal));
        Jadwal_Dokter::create([
         'nama_dokter'=>$request->nama_dokter,
+        'tanggal'=>$request->tanggal,
         'tanggal'=>$tanggal_formatted,
         'ruang'=>$request->ruang,
         'nama_pasien'=>$request->nama_pasien,
@@ -62,18 +63,19 @@ class JadwalDokterController extends Controller
         $this->validate($request,[
         'nama_dokter'=>'required',
         'tanggal'=>'required|date_format:Y-m-d',
-        'ruang'=>'required|unique:jadwal__dokters',
+        'ruang'=>'required',
         'nama_pasien'=>'required',
         ],[
-            'ruang.unique'=>'ruang sedang di pakai',
+
             'nama_dokter.required'=>'Nama harus di isi',
             'tanggal.date_formatted'=>'tanggal harus dipilih',
             'ruang.required'=>'ruang harus diisi',
             'nama_pasien.required'=>'Nama harus di isi',
         ]);
-        $tanggal_formatted = date('d-m-Y', strtotime($request->tanggal));
+        $tanggal_formatted = date('Y-m-d', strtotime($request->tanggal));
         $jadwal_dokter->update([
                 'nama_dokter'=>$request->nama_dokter,
+                'tanggal'=>$request->tanggal,
                 'tanggal'=>$tanggal_formatted,
                 'ruang'=>$request->ruang,
                 'nama_pasien'=>$request->nama_pasien,

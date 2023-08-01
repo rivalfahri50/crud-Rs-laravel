@@ -56,13 +56,14 @@ class DokterController extends Controller
             'jenis_kelamin.required'=>'jenis kelamin harus dipilih',
             'tgl_lahir.required'=>'tanggal lahir harus di isi',
            ]);
-           $tgl_lahir_formatted = date('d-m-Y', strtotime($request->tgl_lahir));
+           $tgl_lahir_formatted = date('Y-m-d', strtotime($request->tgl_lahir));
            $image = $request->file('image');
            $image->storeAs('public/dkt', $image->hashName());
            dokter::create([
             'nama'=>$request->nama,
             'image'=>$image->hashName(),
             'jenis_kelamin'=>$request->jenis_kelamin,
+            'tgl_lahir'=>$request->tgl_lahir,
             'tgl_lahir'=>$tgl_lahir_formatted,
 
            ]);
@@ -104,9 +105,9 @@ class DokterController extends Controller
         'nama'=>'required',
         'image'=>'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'jenis_kelamin'=>'required',
-        'tgl_lahir'=>'required|date_format:Y-m-d',
+        'tgl_lahir'=>'required|date_format:d-m-Y',
     ]);
-    $tgl_lahir_formatted = date('d-m-Y', strtotime($request->tgl_lahir));
+    $tgl_lahir_formatted = date('Y-d-m', strtotime($request->tgl_lahir));
     if($request->hasFile('image')){
         $image = $request->file('image');
         $image->storeAs('public/dkt', $image->hashName());
@@ -116,7 +117,9 @@ class DokterController extends Controller
             'nama'=>$request->nama,
             'image'=>$image->hashName(),
             'jenis_kelamin'=>$request->jenis_kelamin,
+            'tgl_lahir'=>$request->tgl_lahir,
             'tgl_lahir'=>$tgl_lahir_formatted,
+
         ]);
     } else {
         $tgl_lahir_formatted = date('d-m-Y', strtotime($request->tgl_lahir));
@@ -126,6 +129,7 @@ class DokterController extends Controller
             'nama'=>$request->nama,
             'image'=>$image,
             'jenis_kelamin'=>$request->jenis_kelamin,
+            'tgl_lahir'=>$request->tgl_lahir,
             'tgl_lahir'=>$tgl_lahir_formatted,
         ]);
     }

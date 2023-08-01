@@ -54,7 +54,7 @@ class NoAntrianController extends Controller
             'nama.required'=>'Nama harus di isi',
             'tgl_berobat.required'=>'tanggal berobat harus di isi',
            ]);
-           $tgl_berobat_formatted = date('d-m-Y', strtotime($request->tgl_berobat));
+           $tgl_berobat_formatted = date('Y-m-d', strtotime($request->tgl_berobat));
            no_antrian::create([
             'no_antrian'=>$request->no_antrian,
             'nama'=>$request->nama,
@@ -106,7 +106,7 @@ class NoAntrianController extends Controller
             'nama.required'=>'Nama harus di isi',
             'tgl_berobat.required'=>'tanggal berobat harus di isi',
            ] );
-        $tgl_berobat_formatted = date('d-m-Y', strtotime($request->tgl_berobat));
+        $tgl_berobat_formatted = date('Y-m-d', strtotime($request->tgl_berobat));
             $no_antrian->update([
                 'no_antrian'=>$request->no_antrian,
                 'nama'=>$request->nama,
