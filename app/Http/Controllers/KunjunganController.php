@@ -32,7 +32,7 @@ class KunjunganController extends Controller
         'tanggal'=>'required|date_format:Y-m-d',
         'ruang'=>'required|unique:kunjungans',
        ]);
-       $tanggal_formatted = date('d-m-Y', strtotime($request->tanggal));
+       $tanggal_formatted = date('Y-m-d', strtotime($request->tanggal));
        Kunjungan::create([
     'nama_pasien'=>$request->nama_pasien,
     'nama_pengunjung'=>$request->nama_pengunjung,

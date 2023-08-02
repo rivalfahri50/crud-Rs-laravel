@@ -105,7 +105,7 @@ class DokterController extends Controller
         'nama'=>'required',
         'image'=>'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'jenis_kelamin'=>'required',
-        'tgl_lahir'=>'required|date_format:d-m-Y',
+        'tgl_lahir'=>'required|date_format:Y-m-d',
     ]);
     $tgl_lahir_formatted = date('Y-m-d', strtotime($request->tgl_lahir));
     if($request->hasFile('image')){

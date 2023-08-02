@@ -10,11 +10,21 @@ class no_antrian extends Model
     use HasFactory;
     protected $fillable = [
         'id',
-        'no_antrian',
         'nama',
         'tgl_berobat',
     ];
+
+      protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $lastNoAntrian = self::orderByDesc('no_antrian')->value('no_antrian');
+            $model->no_antrian = $lastNoAntrian + 1;
+        });
+    }
     public function pasien(){
         return $this->hasMany(pasien::class, 'no_antrian');
+
     }
 }

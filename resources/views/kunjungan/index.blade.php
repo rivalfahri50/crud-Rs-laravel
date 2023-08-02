@@ -99,7 +99,7 @@
             {{$kunjungan->nama_pasien}}
         </td>
         <td>
-            {{$kunjungan->tanggal}}
+            {{ \Carbon\Carbon::parse($kunjungan->tanggal)->format('d-m-Y') }}
         </td>
         <td>
             {{$kunjungan->ruang}}

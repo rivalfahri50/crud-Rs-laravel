@@ -63,17 +63,6 @@
     @method('PUT')
 
 
-    <div class="mb-3">
-    <label class="form-label fw-bold">No antrian</label>
-    <input type="number" class="form-control @error('no_antrian') is-invalid @enderror" name="no_antrian" value="{{ old('no_antrian', $no_antrian->no_antrian) }}"
-    placeholder="Masukkan nomer" min="1">
-    <!-- error message untuk title -->
-    @error('no_antrian')
-    <div class="alert alert-danger mt-2">
-        {{ $message }}
-    </div>
-    @enderror
-    </div>
 
     <div class="mb-3">
         <label class="form-label fw-bold">Nama Pasien</label>

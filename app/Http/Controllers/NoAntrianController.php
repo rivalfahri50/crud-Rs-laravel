@@ -45,18 +45,15 @@ class NoAntrianController extends Controller
     public function store(Request $request)
     {
         $this->validate($request , [
-            'no_antrian'=>'required|unique:no_antrians',
+
             'nama'=>'required',
             'tgl_berobat'=>'required|date_format:Y-m-d',
            ],[
-            'no_antrian.unique'=>'Kode telah terdaftar',
-            'no_antrian.required'=>'no harus di isi ',
             'nama.required'=>'Nama harus di isi',
             'tgl_berobat.required'=>'tanggal berobat harus di isi',
            ]);
            $tgl_berobat_formatted = date('Y-m-d', strtotime($request->tgl_berobat));
            no_antrian::create([
-            'no_antrian'=>$request->no_antrian,
             'nama'=>$request->nama,
             'tgl_berobat'=>$request->tgl_berobat,
             'tgl_berobat'=>$tgl_berobat_formatted,
@@ -98,18 +95,15 @@ class NoAntrianController extends Controller
     public function update(Request $request, no_antrian $no_antrian)
     {
         $this->validate($request,[
-            'no_antrian'=>'required|unique:no_antrians,no_antrian,'.$no_antrian->id,
             'nama'=>'required',
             'tgl_berobat'=>'required|date_format:Y-m-d',
         ] ,[
-            'no_antrian.unique'=>'Kode telah terdaftar',
-            'no_antrian.required'=>'no harus di isi ',
             'nama.required'=>'Nama harus di isi',
             'tgl_berobat.required'=>'tanggal berobat harus di isi',
            ] );
         $tgl_berobat_formatted = date('Y-m-d', strtotime($request->tgl_berobat));
             $no_antrian->update([
-                'no_antrian'=>$request->no_antrian,
+
                 'nama'=>$request->nama,
                 'tgl_berobat'=>$request->tgl_berobat,
                 'tgl_berobat'=>$tgl_berobat_formatted,

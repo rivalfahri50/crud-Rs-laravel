@@ -66,16 +66,7 @@
     @csrf
 
 
-    <div class="form-group">
-        <label class="font-weight-bold">No Antrian</label>
-        <input type="number" class="form-control @error('no_antrian') is-invalid @enderror" name="no_antrian" value="{{ old('no_antrian') }}" placeholder="Masukkan no antrian" min="1">
-
-        <!-- error message untuk title -->
-        @error('no_antrian')
-            <div class="alert alert-danger mt-2">
-                {{ $message }}
-        @enderror
-    </div>
+   
     <div class="form-group">
         <label class="font-weight-bold">Nama</label>
         <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}" placeholder="Masukkan nama">
