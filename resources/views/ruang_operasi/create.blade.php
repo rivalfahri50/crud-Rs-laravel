@@ -55,6 +55,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card border-0 shadow rounded">
+                    <div class="card-body">
 
 <form action="{{ route('ruang_operasi.store') }}" method="post">
     @csrf

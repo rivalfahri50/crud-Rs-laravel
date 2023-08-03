@@ -151,13 +151,22 @@ class DokterController extends Controller
      */
     public function destroy(dokter $dokter)
     {
-    unlink(public_path('storage/dkt/'.$dokter->image));
-    try {
-        $dokter->delete();
-        return  redirect()->route('dokter.index')->with('successhapus','berhasil menghapus');
+        try {
+            $imagePath = public_path('storage/dkt/'.$dokter->image);
+    
+            // Hapus data dokter
+            $dokter->delete();
+    
+            // Periksa apakah file gambar masih ada sebelum menghapus
+            if (file_exists($imagePath)) {
+                // Menghapus file gambar jika ada
+                unlink($imagePath);
+            }
+    
+            return redirect()->route('dokter.index')->with('successhapus', 'Berhasil menghapus');
+        } catch (QueryException $e) {
+            return back()->withErrors(['doktererror' => 'Data ini masih digunakan']);
+        }
     }
-    catch (QueryException $e) {
-        return back()->withErrors(['doktererror' => 'Data ini masih digunakan']);
-    }
-    }
+    
 }
