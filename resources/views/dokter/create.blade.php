@@ -62,7 +62,7 @@
                             @csrf
                             <div class="form-group">
                                 <div>Dokter</div>
-                              <input type="text" name="nama" class="form-control">
+                              <input type="text" name="nama" class="form-control" placeholder="Masukkan nama">
                                 <!-- error message untuk title -->
                                 @error('nama')
                                     <div class="alert alert-danger mt-2">

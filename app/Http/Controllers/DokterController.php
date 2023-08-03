@@ -106,6 +106,11 @@ class DokterController extends Controller
         'image'=>'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'jenis_kelamin'=>'required',
         'tgl_lahir'=>'required|date_format:Y-m-d',
+    ],[
+        'nama.required'=>'nama wajib diisi',
+        'image.required'=>'foto harus di pilih',
+        'jenis_kelamin.required'=>'jenis kelamin harus dipilih',
+        'tgl_lahir.required'=>'tanggal harus diisi',
     ]);
     $tgl_lahir_formatted = date('Y-m-d', strtotime($request->tgl_lahir));
     if($request->hasFile('image')){

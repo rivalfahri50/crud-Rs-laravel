@@ -55,7 +55,10 @@ class AlatKesehatanController extends Controller
         $this->validate($request,[
             'nama_alat'=>'required',
         'jumlah_alat'=>'required',
-        ]);
+        ],[
+            'nama_alat.required'=>'nama_alat harus di isi',
+            'jumlah_alat.required'=>'jenis kelamin harus dipilih',
+           ]);
             $alat_kesehatan->update([
                 'nama_alat'=>$request->nama_alat,
         'jumlah_alat'=>$request->jumlah_alat,
