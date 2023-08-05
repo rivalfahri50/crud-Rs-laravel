@@ -65,7 +65,7 @@ class CustomAuthController extends Controller
         $data = $request->all();
         $check = $this->create($data);
         Alert::success('Berhasil', 'berhasil registrasi!');
-        return redirect("login");
+        return redirect("login")->with('success','Berhasil Registrasi');
         }
     public function create(array $data)
     {

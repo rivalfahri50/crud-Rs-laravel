@@ -95,7 +95,7 @@
             {{ \Carbon\Carbon::parse($obat->tgl_berobat)->format('d-m-Y') }}
         </td>
         <td>
-            Rp.{{$obat->biaya}}
+            Rp. {{ number_format($obat->biaya, 0, ',', '.') }}
         </td>
         <td>
             <form id="delete-form-{{ $obat->id }}" action="{{route('obat.destroy', $obat->id) }}" method="POST">
